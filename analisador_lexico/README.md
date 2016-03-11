@@ -29,6 +29,17 @@ A linguagem utilizada é uma versão simplificada de C
 ```C
    id = numero;
    id = expressao_numerica;
-   id = char;
+   id = caractere;
    id = literal;
+```
+
+### Formato do programa
+
+```C
+   // Definição de variáveis/constantes
+   // Definição de funções
+   main {
+      // o main não tem o 'int' e não recebe parâmetros
+      // variáveis/comandos
+   }
 ```
