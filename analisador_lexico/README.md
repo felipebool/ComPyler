@@ -10,3 +10,25 @@ A linguagem utilizada é uma versão simplificada de C
       // commandos
    }
 ```
+
+#### While
+```C
+   while (teste) {
+      // comandos
+   }
+```
+
+#### If
+```C
+   if (teste) {
+      // comandos
+   }
+```
+
+#### Atribuição
+```C
+   id = numero;
+   id = expressao_numerica;
+   id = char;
+   id = literal;
+```
