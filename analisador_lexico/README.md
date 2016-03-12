@@ -121,8 +121,9 @@ farão parte da linguagem */
 |id       |op\_rel  | id      |
 
 ####op\_rel
----
+* [==] Igualdade
 
+---
 
 ###Teste
 ---
