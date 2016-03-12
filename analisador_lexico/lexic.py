@@ -31,7 +31,8 @@ if __name__ == "__main__":
    for line in source:
       token = ""
 
-      start_token        = False
+      is_digit           = False
+      start_token        = True
       is_comment         = False
       can_be_comment     = False
       can_be_end_comment = False
@@ -48,11 +49,17 @@ if __name__ == "__main__":
             # valid code
             if (not is_comment and not can_be_comment):
                if (ch == ' ' or ch == ';'):
+                  start_token = True
                   create_token(token)
                   token = ""
+
+               elif (ch.isdigit() and start_token):
+                  token += ch
+
                elif (ch == '='):
                   create_token(ch)
                   token = ""
+
                else:
                   token += ch
                   print ch
