@@ -68,7 +68,7 @@ A linguagem utilizada é uma versão simplificada de C
 ```
 
 ### Números
-   Sequência de dígitos, com ou sem '.'. Se tiver ponto, é seguido por sequência
+   Sequência de dígitos, com ou sem ponto (.). Se tiver ponto, é seguido por sequência
    de dígitos.
 
 ### Char
@@ -93,29 +93,24 @@ A linguagem utilizada é uma versão simplificada de C
 
 
 #### op_arit
-   `+ Adição
-
-   `- Subtração
-
-   `* Multiplicação
-
-   / Divisão de inteiros
-
-   #   Divisão de reais
+   * `+ Adição
+   * `- Subtração
+   * `* Multiplicação
+   * / Divisão de inteiros
+   * #   Divisão de reais
 
 ### Expressões relacionais
-   num op_rel num
-
-   num op_rel id
-
-   id op_rel num
-
-   id op_rel id
+| operador| op_arit | operador|
+|---------|---------|---------|
+|num      |op_rel   | num     |
+|num      |op_rel   | id      |
+|id       |op_rel   | num     |
+|id       |op_rel   | id      |
 
 #### op_rel
-   [==] Igualdade
-   [!=] Diferença
-   [<] Menor que
-   [>] Maior que
-   [>=] 
+   * [==] Igualdade
+   * [!=] Diferença
+   * [<] Menor que
+   * [>] Maior que
+   * [>=] 
 
