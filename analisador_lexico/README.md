@@ -93,11 +93,11 @@ A linguagem utilizada é uma versão simplificada de C
 
 
 #### op_arit
-   * \+ Adição
-   * \- Subtração
-   * \* Multiplicação
-   * / Divisão de inteiros
-   * #   Divisão de reais
+   * [\+] Adição
+   * [\-] Subtração
+   * [\*] Multiplicação
+   * [/] Divisão de inteiros
+   * [#]   Divisão de reais
 
 ### Expressões relacionais
 | operador| op_arit | operador|
