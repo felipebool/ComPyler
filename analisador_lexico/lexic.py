@@ -1,14 +1,34 @@
 #!/usr/bin/python
 
+def create_token(token):
+   data_type     = ['int', 'char', 'float', 'string', 'const']
+   special_chars = ['{', '}', '[', ']', '(', ')']
+   op_arit       = ['+', '-', '*', '/', '#']
+
+   print "token: %s" % (token)
+
+   if (token in data_type):
+      return "<type;%s>" % (token)
+
+   if (token in special_chars):
+      return "<%s;>" % (token)
+
+   if (token in op_arit):
+      return "<op_arit;%s>" % (token)
+
+   if (token == '='):
+      return "<=;>"
+
+   if (token == 'main'):
+      return "<main;%s>" % (token)
+
+   return "<id;%s>" % (token)
+
 # main program
 if __name__ == "__main__":
    source = open('test.c', 'r');
 
-   lines = 0
-   chars = 0
-
    for line in source:
-      lines += 1
       token = ""
 
       is_comment         = False
@@ -16,7 +36,6 @@ if __name__ == "__main__":
       can_be_end_comment = False
 
       for ch in ' '.join(line.split()):
-         chars += 1
          if (not is_comment):
             if (ch == '/'):
                can_be_comment = True
@@ -25,12 +44,17 @@ if __name__ == "__main__":
                can_be_comment = False
                is_comment = True
 
+            # valid code
             if (not is_comment and not can_be_comment):
-               if (ch != ' ' and ch != ';'):
-                  token = token + ch
-               else:
-                  print token
+               if (ch == ' ' or ch == ';'):
+                  create_token(token)
                   token = ""
+               elif (ch == '='):
+                  create_token(ch)
+                  token = ""
+               else:
+                  token += ch
+                  print ch
 
          else:
             if (ch == '*'):

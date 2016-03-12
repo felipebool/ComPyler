@@ -2,9 +2,9 @@
    int var2;
 int var3;
 
-const        const1;
-const    const2;
-const const3;
+const        const1 = 3;
+const    const2 = 2;
+const const3 = 1;
 
 int     function1()   {
    /* do stuff here */
