@@ -121,12 +121,12 @@ farão parte da linguagem */
 |id       |op_rel  | id      |
 
 ####op_rel
-* ==  Igualdade
-* !=  Diferença
-* \<  Menor que
-* \>  Maior que
-* \>=  Maior ou igual a
-* \<=  Menor ou igual a
+* Igualdade
+* Diferença
+* Menor que
+* Maior que
+* Maior ou igual a
+* Menor ou igual a
 ---
 
 ###Teste
