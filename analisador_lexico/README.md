@@ -123,9 +123,10 @@ farão parte da linguagem */
 ####op_rel
 * [==] Igualdade
 * [!=] Diferença
-* [<] Menor que
-* [>] Maior que
-* [>=] Maior ou igual a
+* [\<] Menor que
+* [\>] Maior que
+* [\>=] Maior ou igual a
+* [\<=] Menor ou igual a
 ---
 
 ###Teste
