@@ -67,3 +67,19 @@ A linguagem utilizada é uma versão simplificada de C
    const identificador = num;
 ```
 
+### Números
+   Sequência de dígitos, com ou sem '.'. Se tiver ponto, é seguido por sequência
+   de dígitos.
+
+### Char
+   Aspas simples, uma letra, fecha aspas simples, exemplo: 'a'.
+
+### Literal
+   Aspas dupas, uma string, fecha aspas duplas, exemplo: "aaa".
+
+### Comentários
+```C
+   /* somente comentários multi linha
+   farão parte da linguagem */
+```
+
