@@ -34,7 +34,6 @@ A linguagem utilizada é uma versão simplificada de C
 ```
 
 ### Formato do programa
-
 ```C
    // Definição de variáveis/constantes
    // Definição de funções
@@ -43,3 +42,28 @@ A linguagem utilizada é uma versão simplificada de C
       // variáveis/comandos
    }
 ```
+
+### Declaração de variáveis
+```C
+   tipo identificador;
+```
+
+### Tipos
+```C
+   int
+   char
+   float
+   string
+```
+
+### Identificador
+```C
+   letra{letra/numero}
+```
+
+### Constantes
+```C
+   // somente constantes numéricas
+   const identificador = num;
+```
+
