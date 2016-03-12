@@ -91,6 +91,12 @@ A linguagem utilizada é uma versão simplificada de C
    | id       | op_arit | num      |
    | id       | op_arit | id       |
 
+
+| a  | b  | c  | d  | e  |
+|----|----|----|----|----|
+| 1  | 2  | 3  | 4  | 5  |
+| 6  | 7  | 8  | 9  | 0  |
+
 #### op_arit
    + Adição
 
