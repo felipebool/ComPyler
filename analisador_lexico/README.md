@@ -92,19 +92,12 @@ A linguagem utilizada é uma versão simplificada de C
 |id       |op_arit  | id      |
 
 
-| operador  | op_arit | operador |
-|-----------|---------|----------|
-| num         |      2  |       3  |
-| 1         |      2  |       3  |
-| 1         |      2  |       3  |
-| 6         |      7  |       8  |
-
 #### op_arit
-   + Adição
+   `+ Adição
 
-   - Subtração
+   `- Subtração
 
-   * Multiplicação
+   `* Multiplicação
 
    / Divisão de inteiros
 
