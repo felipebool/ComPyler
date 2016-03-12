@@ -114,7 +114,7 @@ farão parte da linguagem */
 ###Expressões relacionais
 ---
 | operador| op\_rel | operador|
-|---------|--------|---------|
+|---------|---------|---------|
 |num      |op\_rel  | num     |
 |num      |op\_rel  | id      |
 |id       |op\_rel  | num     |
@@ -123,10 +123,10 @@ farão parte da linguagem */
 ####op\_rel
 * [==] Igualdade
 * [!=] Diferença
-* [<] Menor que
-* [>] Maior que
-* [>=] Maior ou igual a
-* [<=]Menor ou igual a
+* [\<] Menor que
+* [\>] Maior que
+* [\>=] Maior ou igual a
+* [\<=]Menor ou igual a
 ---
 
 ###Teste
