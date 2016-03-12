@@ -93,9 +93,9 @@ A linguagem utilizada é uma versão simplificada de C
 
 
 #### op_arit
-   * `+ Adição
-   * `- Subtração
-   * `* Multiplicação
+   * \+ Adição
+   * \- Subtração
+   * \* Multiplicação
    * / Divisão de inteiros
    * #   Divisão de reais
 
