@@ -122,7 +122,7 @@ farão parte da linguagem */
 
 ####op\_rel
 * [==] Igualdade
-
+* [!=] Diferença
 ---
 
 ###Teste
