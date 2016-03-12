@@ -56,7 +56,6 @@ id = literal;
 ```
 
 ###Formato do programa
----
 ```C
 // Definição de variáveis/constantes
 // Definição de funções
@@ -67,13 +66,11 @@ main {
 ```
 
 ###Declaração de variáveis
----
 ```C
 tipo identificador;
 ```
 
 ###Tipos
----
 ```C
 int
 char
@@ -82,33 +79,27 @@ string
 ```
 
 ###Identificador
----
 ```C
 letra{letra/numero}
 ```
 
 ###Constantes
----
 ```C
 // somente constantes numéricas
 const identificador = num;
 ```
 
 ###Números
----
 Sequência de dígitos, com ou sem ponto. Se tiver ponto, é seguido por sequência de dígitos, 
 por exemplo: 123, 12.345
 
 ###Char
----
 Aspas simples, uma letra, fecha aspas simples, exemplo: 'a'.
 
 ###Literal
----
 Aspas dupas, uma string, fecha aspas duplas, exemplo: "aaa".
 
 ###Comentários
----
 ```C
 /* somente comentários multi linha
 farão parte da linguagem */
