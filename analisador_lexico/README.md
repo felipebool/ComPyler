@@ -83,3 +83,15 @@ A linguagem utilizada é uma versão simplificada de C
    farão parte da linguagem */
 ```
 
+### Expressões aritméticas
+   num op_arit num;
+   num op_arit id;
+   id op_arit num;
+   id op_arit_id;
+
+### op_arit
+   * [+] Adição
+   * [-] Subtração
+   * [*] Multiplicação
+   * [/] Divisão de inteiros
+   * [#] Divisão de reais
