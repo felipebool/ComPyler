@@ -107,7 +107,7 @@ farão parte da linguagem */
 ####op\_arit
 +, -, \*, / \(divisão de inteiros\) e \# \(divisão de reais\). 
 
-###Expressões relacionais
+<!--###Expressões relacionais
 ---
 | operador| op\_rel | operador|
 |---------|---------|---------|
@@ -118,7 +118,7 @@ farão parte da linguagem */
 
 
 
-####op\_rel
+####Operadores
 Os operadores relacionais são 
 ---
 
@@ -128,7 +128,7 @@ Os operadores relacionais são
    * Expressão lógica
 
 ####Expressão lógica
-| operador | op\_log | operador  |
-|----------|--------|-----------|
+| operador  | op\_log | operador   |
+|-----------|=--------|------------|
 |(exp\_rel) |op\_log  | (exp\_rel) |
-
+-->
