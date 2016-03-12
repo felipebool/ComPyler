@@ -105,11 +105,8 @@ farão parte da linguagem */
 
 
 ####op\_arit
-* \[\+\] Adição
-* \[\-\] Subtração
-* \[\*\] Multiplicação
-* \[/\] Divisão de inteiros
-* \[&#35;\]   Divisão de reais
+Os operadores aritméticos são: +, -, \*, \/ (divisão de inteiros)
+e \# divisão de reais. 
 
 ###Expressões relacionais
 ---
@@ -121,8 +118,7 @@ farão parte da linguagem */
 |id       |op\_rel  | id      |
 
 ####op\_rel
-* \[==\] Igualdade
-* \[!=\] Diferença
+Os operadores relacionais são 
 ---
 
 ###Teste
