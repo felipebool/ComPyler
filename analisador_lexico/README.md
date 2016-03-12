@@ -97,7 +97,7 @@ farão parte da linguagem */
 ###Expressões aritméticas
 ---
 | operador| op\_arit | operador|
-|---------|---------|---------|
+|---------|----------|---------|
 |num      |op\_arit  | num     |
 |num      |op\_arit  | id      |
 |id       |op\_arit  | num     |
@@ -105,8 +105,7 @@ farão parte da linguagem */
 
 
 ####op\_arit
-Os operadores aritméticos são: +, -, \*, \/ (divisão de inteiros)
-e \# divisão de reais. 
++, -, \*, / \(divisão de inteiros\) e \# \(divisão de reais\). 
 
 ###Expressões relacionais
 ---
@@ -116,6 +115,8 @@ e \# divisão de reais.
 |num      |op\_rel  | id      |
 |id       |op\_rel  | num     |
 |id       |op\_rel  | id      |
+
+
 
 ####op\_rel
 Os operadores relacionais são 
