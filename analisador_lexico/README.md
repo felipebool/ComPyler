@@ -96,15 +96,15 @@ farão parte da linguagem */
 
 ###Expressões aritméticas
 ---
-| operador| op_arit | operador|
+| operador| op\_arit | operador|
 |---------|---------|---------|
-|num      |op_arit  | num     |
-|num      |op_arit  | id      |
-|id       |op_arit  | num     |
-|id       |op_arit  | id      |
+|num      |op\_arit  | num     |
+|num      |op\_arit  | id      |
+|id       |op\_arit  | num     |
+|id       |op\_arit  | id      |
 
 
-####op_arit
+####op\_arit
 * [\+] Adição
 * [\-] Subtração
 * [\*] Multiplicação
@@ -113,14 +113,14 @@ farão parte da linguagem */
 
 ###Expressões relacionais
 ---
-| operador| op_rel | operador|
+| operador| op\_rel | operador|
 |---------|--------|---------|
-|num      |op_rel  | num     |
-|num      |op_rel  | id      |
-|id       |op_rel  | num     |
-|id       |op_rel  | id      |
+|num      |op\_rel  | num     |
+|num      |op\_rel  | id      |
+|id       |op\_rel  | num     |
+|id       |op\_rel  | id      |
 
-####op_rel
+####op\_rel
 * Igualdade
 * Diferença
 * Menor que
@@ -135,7 +135,7 @@ farão parte da linguagem */
    * Expressão lógica
 
 ####Expressão lógica
-| operador | op_log | operador  |
+| operador | op\_log | operador  |
 |----------|--------|-----------|
-|(exp_rel) |op_log  | (exp_rel) |
+|(exp\_rel) |op\_log  | (exp\_rel) |
 
