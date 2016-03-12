@@ -1,33 +1,33 @@
-# Analisador Léxico
+#Analisador Léxico
 
-## Definição da linguagem
+##Definição da linguagem
 ---
 A linguagem utilizada é uma versão simplificada de C
 
-### Comandos
+###Comandos
 ---
-#### For
+####For
 ```C
 for (atribuicao; teste; incremento) {
    // commandos
 }
 ```
 
-#### While
+####While
 ```C
 while (teste) {
    // comandos
 }
 ```
 
-#### If
+####If
 ```C
 if (teste) {
    // comandos
 }
 ```
 
-#### Atribuição
+####Atribuição
 ```C
 id = numero;
 id = expressao_numerica;
@@ -35,7 +35,7 @@ id = caractere;
 id = literal;
 ```
 
-### Formato do programa
+###Formato do programa
 ---
 ```C
 // Definição de variáveis/constantes
@@ -46,13 +46,13 @@ main {
 }
 ```
 
-### Declaração de variáveis
+###Declaração de variáveis
 ---
 ```C
 tipo identificador;
 ```
 
-### Tipos
+###Tipos
 ---
 ```C
 int
@@ -61,39 +61,40 @@ float
 string
 ```
 
-### Identificador
+###Identificador
 ---
 ```C
 letra{letra/numero}
 ```
 
-### Constantes
+###Constantes
 ---
 ```C
 // somente constantes numéricas
 const identificador = num;
 ```
 
-### Números
+###Números
 ---
 Sequência de dígitos, com ou sem ponto. Se tiver ponto, é seguido por sequência de dígitos, 
 por exemplo: 123, 12.345
 
-### Char
+###Char
 ---
 Aspas simples, uma letra, fecha aspas simples, exemplo: 'a'.
 
-### Literal
+###Literal
 ---
 Aspas dupas, uma string, fecha aspas duplas, exemplo: "aaa".
 
-### Comentários
+###Comentários
 ---
 ```C
-/* somente comentários multi linha farão parte da linguagem */
+/* somente comentários multi linha
+farão parte da linguagem */
 ```
 
-### Expressões aritméticas
+###Expressões aritméticas
 ---
 | operador| op_arit | operador|
 |---------|---------|---------|
@@ -103,14 +104,14 @@ Aspas dupas, uma string, fecha aspas duplas, exemplo: "aaa".
 |id       |op_arit  | id      |
 
 
-#### op_arit
-* [+] Adição
-* [-] Subtração
-* [*] Multiplicação
+####op_arit
+* [\+] Adição
+* [\-] Subtração
+* [\*] Multiplicação
 * [/] Divisão de inteiros
-* [#]   Divisão de reais
+* [C&#35;]   Divisão de reais
 
-### Expressões relacionais
+###Expressões relacionais
 ---
 | operador| op_rel | operador|
 |---------|--------|---------|
@@ -119,7 +120,7 @@ Aspas dupas, uma string, fecha aspas duplas, exemplo: "aaa".
 |id       |op_rel  | num     |
 |id       |op_rel  | id      |
 
-#### op_rel
+####op_rel
 * [==] Igualdade
 * [!=] Diferença
 * [<] Menor que
@@ -128,12 +129,12 @@ Aspas dupas, uma string, fecha aspas duplas, exemplo: "aaa".
 * [<=] Menor ou igual a
 ---
 
-### Teste
+###Teste
 ---
    * Expressão relacional
    * Expressão lógica
 
-#### Expressão lógica
+####Expressão lógica
 | operador | op_log | operador  |
 |----------|--------|-----------|
 |(exp_rel) |op_log  | (exp_rel) |
