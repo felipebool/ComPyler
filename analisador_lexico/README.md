@@ -105,11 +105,11 @@ farão parte da linguagem */
 
 
 ####op\_arit
-* [\+] Adição
-* [\-] Subtração
-* [\*] Multiplicação
-* [/] Divisão de inteiros
-* [&#35;]   Divisão de reais
+* \[\+\] Adição
+* \[\-\] Subtração
+* \[\*\] Multiplicação
+* \[/\] Divisão de inteiros
+* \[&#35;\]   Divisão de reais
 
 ###Expressões relacionais
 ---
@@ -121,8 +121,8 @@ farão parte da linguagem */
 |id       |op\_rel  | id      |
 
 ####op\_rel
-* [==] Igualdade
-* [!=] Diferença
+* \[==\] Igualdade
+* \[!=\] Diferença
 ---
 
 ###Teste
