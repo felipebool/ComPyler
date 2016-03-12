@@ -109,7 +109,7 @@ farão parte da linguagem */
 * [\-] Subtração
 * [\*] Multiplicação
 * [/] Divisão de inteiros
-* [&#35;]   Divisão de reais
+* [&#35;] Divisão de reais
 
 ###Expressões relacionais
 ---
@@ -121,12 +121,12 @@ farão parte da linguagem */
 |id       |op\_rel  | id      |
 
 ####op\_rel
-* Igualdade
-* Diferença
-* Menor que
-* Maior que
-* Maior ou igual a
-* Menor ou igual a
+   * Igualdade
+   * Diferença
+   * Menor que
+   * Maior que
+   * Maior ou igual a
+   * Menor ou igual a
 ---
 
 ###Teste
