@@ -84,16 +84,18 @@ A linguagem utilizada é uma versão simplificada de C
 ```
 
 ### Expressões aritméticas
-   | operador| op_arit | operador|
-   |---------|---------|---------|
-   |num      |op_arit  | num     |
-   |num      |op_arit  | id      |
-   |id       |op_arit  | num     |
-   |id       |op_arit  | id      |
+| operador| op_arit | operador|
+|---------|---------|---------|
+|num      |op_arit  | num     |
+|num      |op_arit  | id      |
+|id       |op_arit  | num     |
+|id       |op_arit  | id      |
 
 
 | operador  | op_arit | operador |
 |-----------|---------|----------|
+| num         |      2  |       3  |
+| 1         |      2  |       3  |
 | 1         |      2  |       3  |
 | 6         |      7  |       8  |
 
