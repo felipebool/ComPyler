@@ -32,6 +32,7 @@ A linguagem utilizada é uma versão simplificada de C
    id = caractere;
    id = literal;
 ```
+---
 
 ### Formato do programa
 ```C
@@ -42,11 +43,13 @@ A linguagem utilizada é uma versão simplificada de C
       // variáveis/comandos
    }
 ```
+---
 
 ### Declaração de variáveis
 ```C
    tipo identificador;
 ```
+---
 
 ### Tipos
 ```C
@@ -55,33 +58,40 @@ A linguagem utilizada é uma versão simplificada de C
    float
    string
 ```
+---
 
 ### Identificador
 ```C
    letra{letra/numero}
 ```
+---
 
 ### Constantes
 ```C
    // somente constantes numéricas
    const identificador = num;
 ```
+---
 
 ### Números
    Sequência de dígitos, com ou sem ponto (.). Se tiver ponto, é seguido por sequência
    de dígitos.
+---
 
 ### Char
    Aspas simples, uma letra, fecha aspas simples, exemplo: 'a'.
+---
 
 ### Literal
    Aspas dupas, uma string, fecha aspas duplas, exemplo: "aaa".
+---
 
 ### Comentários
 ```C
    /* somente comentários multi linha
    farão parte da linguagem */
 ```
+---
 
 ### Expressões aritméticas
 | operador| op_arit | operador|
@@ -98,19 +108,30 @@ A linguagem utilizada é uma versão simplificada de C
    * [\*] Multiplicação
    * [/] Divisão de inteiros
    * [#]   Divisão de reais
+---
 
 ### Expressões relacionais
-| operador| op_arit | operador|
-|---------|---------|---------|
-|num      |op_rel   | num     |
-|num      |op_rel   | id      |
-|id       |op_rel   | num     |
-|id       |op_rel   | id      |
+| operador| op_rel | operador|
+|---------|--------|---------|
+|num      |op_rel  | num     |
+|num      |op_rel  | id      |
+|id       |op_rel  | num     |
+|id       |op_rel  | id      |
 
 #### op_rel
    * [==] Igualdade
    * [!=] Diferença
    * [<] Menor que
    * [>] Maior que
-   * [>=] 
+   * [>=]
+---
+
+### Teste
+   * Expressão relacional
+   * Expressão lógica
+
+#### Expressão lógica
+| operador | op_log | operador  |
+|----------|--------|-----------|
+|(exp_rel) |op_log  | (exp_rel) |
 
