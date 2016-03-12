@@ -6,70 +6,70 @@ A linguagem utilizada é uma versão simplificada de C
 ### Comandos
 #### For
 ```C
-   for (atribuicao; teste; incremento) {
-      // commandos
-   }
+for (atribuicao; teste; incremento) {
+   // commandos
+}
 ```
 
 #### While
 ```C
-   while (teste) {
-      // comandos
-   }
+while (teste) {
+   // comandos
+}
 ```
 
 #### If
 ```C
-   if (teste) {
-      // comandos
-   }
+if (teste) {
+   // comandos
+}
 ```
 
 #### Atribuição
 ```C
-   id = numero;
-   id = expressao_numerica;
-   id = caractere;
-   id = literal;
+id = numero;
+id = expressao_numerica;
+id = caractere;
+id = literal;
 ```
 ---
 
 ### Formato do programa
 ```C
-   // Definição de variáveis/constantes
-   // Definição de funções
-   main {
-      // o main não tem o 'int' e não recebe parâmetros
-      // variáveis/comandos
-   }
+// Definição de variáveis/constantes
+// Definição de funções
+main {
+   // o main não tem o 'int' e não recebe parâmetros
+   // variáveis/comandos
+}
 ```
 ---
 
 ### Declaração de variáveis
 ```C
-   tipo identificador;
+tipo identificador;
 ```
 ---
 
 ### Tipos
 ```C
-   int
-   char
-   float
-   string
+int
+char
+float
+string
 ```
 ---
 
 ### Identificador
 ```C
-   letra{letra/numero}
+letra{letra/numero}
 ```
 ---
 
 ### Constantes
 ```C
-   // somente constantes numéricas
-   const identificador = num;
+// somente constantes numéricas
+const identificador = num;
 ```
 ---
 
@@ -85,13 +85,14 @@ Aspas simples, uma letra, fecha aspas simples, exemplo: 'a'.
 ---
 
 ### Literal
-   Aspas dupas, uma string, fecha aspas duplas, exemplo: "aaa".
+Aspas dupas, uma string, fecha aspas duplas, exemplo: "aaa".
+
 ---
 
 ### Comentários
 ```C
-   /* somente comentários multi linha
-   farão parte da linguagem */
+/* somente comentários multi linha
+farão parte da linguagem */
 ```
 ---
 
@@ -105,11 +106,11 @@ Aspas simples, uma letra, fecha aspas simples, exemplo: 'a'.
 
 
 #### op_arit
-   * [\+] Adição
-   * [\-] Subtração
-   * [\*] Multiplicação
-   * [/] Divisão de inteiros
-   * [#]   Divisão de reais
+* [\+] Adição
+* [\-] Subtração
+* [\*] Multiplicação
+* [/] Divisão de inteiros
+* [#]   Divisão de reais
 ---
 
 ### Expressões relacionais
@@ -121,11 +122,11 @@ Aspas simples, uma letra, fecha aspas simples, exemplo: 'a'.
 |id       |op_rel  | id      |
 
 #### op_rel
-   * [==] Igualdade
-   * [!=] Diferença
-   * [<] Menor que
-   * [>] Maior que
-   * [>=]
+* [==] Igualdade
+* [!=] Diferença
+* [<] Menor que
+* [>] Maior que
+* [>=]
 ---
 
 ### Teste
