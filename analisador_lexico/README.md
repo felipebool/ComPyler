@@ -7,21 +7,21 @@ A linguagem utilizada é uma versão simplificada de C
 #### For
 ```C
 for (atribuicao; teste; incremento) {
-   // commandos
+   \/\/ commandos
 }
 ```
 
 #### While
 ```C
 while (teste) {
-   // comandos
+   \/\/ comandos
 }
 ```
 
 #### If
 ```C
 if (teste) {
-   // comandos
+   \/\/ comandos
 }
 ```
 
@@ -36,11 +36,11 @@ id = literal;
 
 ### Formato do programa
 ```C
-// Definição de variáveis/constantes
-// Definição de funções
+\/\/ Definição de variáveis/constantes
+\/\/ Definição de funções
 main {
-   // o main não tem o 'int' e não recebe parâmetros
-   // variáveis/comandos
+   \/\/ o main não tem o 'int' e não recebe parâmetros
+   \/\/ variáveis\/comandos
 }
 ```
 ---
@@ -62,7 +62,7 @@ string
 
 ### Identificador
 ```C
-letra{letra/numero}
+letra{letra\/numero}
 ```
 ---
 
@@ -91,8 +91,8 @@ Aspas dupas, uma string, fecha aspas duplas, exemplo: "aaa".
 
 ### Comentários
 ```C
-/* somente comentários multi linha
-farão parte da linguagem */
+/\* somente comentários multi linha
+farão parte da linguagem \*/
 ```
 ---
 
@@ -110,7 +110,6 @@ farão parte da linguagem */
 * [\-] Subtração
 * [\*] Multiplicação
 * [/] Divisão de inteiros
-* `#   Divisão de reais
 ---
 
 ### Expressões relacionais
