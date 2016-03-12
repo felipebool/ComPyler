@@ -20,7 +20,7 @@ int    function2() {
 int function3() {/* do stuff here */}
 
 int
-function4(){/* do stuff here */
+function4()/*weird placed comment*/{/* do stuff here */
 }
 
 /*
@@ -36,7 +36,10 @@ asdf
 */
 
 
-main            {
+main            {/*asdfasdf
+asdfasdf
+
+*/
    int a;
    int b;
    float c;
