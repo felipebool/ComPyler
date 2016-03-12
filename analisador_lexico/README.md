@@ -109,8 +109,8 @@ farão parte da linguagem */
 * [\+] Adição
 * [\-] Subtração
 * [\*] Multiplicação
-* [\/] Divisão de inteiros
-* [`#`]   Divisão de reais
+* [/] Divisão de inteiros
+* [\#]   Divisão de reais
 ---
 
 ### Expressões relacionais
