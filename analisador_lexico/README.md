@@ -126,7 +126,6 @@ farão parte da linguagem */
 * [<] Menor que
 * [>] Maior que
 * [>=] Maior ou igual a
-* [&lt;=] Menor ou igual a
 ---
 
 ###Teste
