@@ -31,6 +31,7 @@ if __name__ == "__main__":
    for line in source:
       token = ""
 
+      start_token        = False
       is_comment         = False
       can_be_comment     = False
       can_be_end_comment = False
@@ -56,6 +57,7 @@ if __name__ == "__main__":
                   token += ch
                   print ch
 
+         # comment
          else:
             if (ch == '*'):
                can_be_end_comment = True
