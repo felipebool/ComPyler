@@ -74,8 +74,8 @@ A linguagem utilizada é uma versão simplificada de C
 ---
 
 ### Números
-   Sequência de dígitos, com ou sem ponto (.). Se tiver ponto, é seguido por sequência
-   de dígitos.
+   Sequência de dígitos, com ou sem ponto. Se tiver ponto, é seguido por sequência de dígitos.
+   Por exemplo: 123, 12.345
 ---
 
 ### Char
