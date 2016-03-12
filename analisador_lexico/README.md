@@ -110,7 +110,7 @@ farão parte da linguagem */
 * [\-] Subtração
 * [\*] Multiplicação
 * [\/] Divisão de inteiros
-* [\#]   Divisão de reais
+* [`#]   Divisão de reais
 ---
 
 ### Expressões relacionais
@@ -126,7 +126,8 @@ farão parte da linguagem */
 * [!=] Diferença
 * [<] Menor que
 * [>] Maior que
-* [>=]
+* [>=] Maior ou igual a
+* [<=] Menor ou igual a
 ---
 
 ### Teste
