@@ -1,26 +1,37 @@
 #Analisador Léxico
 
+##Definição do trabalho
+Fazer o analisador léxico para a linguagem definida logo abaixo,
+o analisador *deve* ser implementado em uma função que retorna um
+token a cada chamada.
+O programa principal *deve* ser um loop até o final do arquivo com
+chamadas sucessivas à função do analisador léxico. Após cada chamada
+da função, o programa principal deve gravar os token no arquivo
+*saída.tokens*.
+O programa deve indicar erros léxicos, mostrando em qual linha ocorreu,
+o programa *pára no primeiro erro* encontrado 
+
 ##Definição da linguagem
----
-A linguagem utilizada é uma versão simplificada de C
+A linguagem para implementação do analisador léxico é uma versão
+simplificada do C e está definida em maiores detalhes logo abaixo.
 
 ###Comandos
----
-####For
+
+For
 ```C
 for (atribuicao; teste; incremento) {
    // commandos
 }
 ```
 
-####While
+While
 ```C
 while (teste) {
    // comandos
 }
 ```
 
-####If
+If
 ```C
 if (teste) {
    // comandos
@@ -94,6 +105,7 @@ Aspas dupas, uma string, fecha aspas duplas, exemplo: "aaa".
 farão parte da linguagem */
 ```
 
+<!--
 ###Expressões aritméticas
 ---
 | operador| op\_arit | operador|
@@ -107,7 +119,7 @@ farão parte da linguagem */
 ####op\_arit
 +, -, \*, / \(divisão de inteiros\) e \# \(divisão de reais\). 
 
-<!--###Expressões relacionais
+###Expressões relacionais
 ---
 | operador| op\_rel | operador|
 |---------|---------|---------|
