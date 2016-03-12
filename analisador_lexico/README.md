@@ -1,27 +1,29 @@
 # Analisador Léxico
 
 ## Definição da linguagem
+---
 A linguagem utilizada é uma versão simplificada de C
 
 ### Comandos
+---
 #### For
 ```C
 for (atribuicao; teste; incremento) {
-   \/\/ commandos
+   // commandos
 }
 ```
 
 #### While
 ```C
 while (teste) {
-   \/\/ comandos
+   // comandos
 }
 ```
 
 #### If
 ```C
 if (teste) {
-   \/\/ comandos
+   // comandos
 }
 ```
 
@@ -32,71 +34,67 @@ id = expressao_numerica;
 id = caractere;
 id = literal;
 ```
----
 
 ### Formato do programa
+---
 ```C
-\/\/ Definição de variáveis/constantes
-\/\/ Definição de funções
+// Definição de variáveis/constantes
+// Definição de funções
 main {
-   \/\/ o main não tem o 'int' e não recebe parâmetros
-   \/\/ variáveis\/comandos
+   // o main não tem o 'int' e não recebe parâmetros
+   // variáveis/comandos
 }
 ```
----
 
 ### Declaração de variáveis
+---
 ```C
 tipo identificador;
 ```
----
 
 ### Tipos
+---
 ```C
 int
 char
 float
 string
 ```
----
 
 ### Identificador
-```C
-letra{letra\/numero}
-```
 ---
+```C
+letra{letra/numero}
+```
 
 ### Constantes
+---
 ```C
 // somente constantes numéricas
 const identificador = num;
 ```
----
 
 ### Números
+---
 Sequência de dígitos, com ou sem ponto. Se tiver ponto, é seguido por sequência de dígitos, 
 por exemplo: 123, 12.345
 
----
-
 ### Char
+---
 Aspas simples, uma letra, fecha aspas simples, exemplo: 'a'.
 
----
-
 ### Literal
+---
 Aspas dupas, uma string, fecha aspas duplas, exemplo: "aaa".
 
----
-
 ### Comentários
-```C
-/\* somente comentários multi linha
-farão parte da linguagem \*/
-```
 ---
+```C
+/* somente comentários multi linha farão parte da linguagem */
+```
 
 ### Expressões aritméticas
+---
 | operador| op_arit | operador|
 |---------|---------|---------|
 |num      |op_arit  | num     |
@@ -106,13 +104,14 @@ farão parte da linguagem \*/
 
 
 #### op_arit
-* [\+] Adição
-* [\-] Subtração
-* [\*] Multiplicação
+* [+] Adição
+* [-] Subtração
+* [*] Multiplicação
 * [/] Divisão de inteiros
----
+* [#]   Divisão de reais
 
 ### Expressões relacionais
+---
 | operador| op_rel | operador|
 |---------|--------|---------|
 |num      |op_rel  | num     |
@@ -130,6 +129,7 @@ farão parte da linguagem \*/
 ---
 
 ### Teste
+---
    * Expressão relacional
    * Expressão lógica
 
