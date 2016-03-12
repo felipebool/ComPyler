@@ -84,17 +84,37 @@ A linguagem utilizada é uma versão simplificada de C
 ```
 
 ### Expressões aritméticas
-   num op_arit num;
+   | operador | op_arit | operador |
+   | -------- | ------- | -------- |
+   | num      | op_arit | num      |
+   | num      | op_arit | id       |
+   | id       | op_arit | num      |
+   | id       | op_arit | id       |
 
-   num op_arit id;
+#### op_arit
+   + Adição
 
-   id op_arit num;
+   - Subtração
 
-   id op_arit_id;
+   * Multiplicação
 
-### op_arit
-   * [+] Adição
-   * [-] Subtração
-   * [*] Multiplicação
-   * [/] Divisão de inteiros
-   * [#] Divisão de reais
+   / Divisão de inteiros
+
+   #   Divisão de reais
+
+### Expressões relacionais
+   num op_rel num
+
+   num op_rel id
+
+   id op_rel num
+
+   id op_rel id
+
+#### op_rel
+   [==] Igualdade
+   [!=] Diferença
+   [<] Menor que
+   [>] Maior que
+   [>=] 
+
