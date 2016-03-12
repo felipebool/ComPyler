@@ -85,8 +85,11 @@ A linguagem utilizada é uma versão simplificada de C
 
 ### Expressões aritméticas
    num op_arit num;
+
    num op_arit id;
+
    id op_arit num;
+
    id op_arit_id;
 
 ### op_arit
