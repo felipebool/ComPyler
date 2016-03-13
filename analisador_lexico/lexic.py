@@ -1,5 +1,31 @@
 #!/usr/bin/python
 
+import sys, getopt
+
+# Parse dos nomes de arquivos de entrada e saída na linha de comado
+def get_cmdline_args(argv):
+
+   try:
+      opts, args = getopt.getopt(argv,"hi:o:q:",["ifile=","ofile=","quiet="])
+   except getopt.GetoptError:
+      print 'Usage: ' + sys.argv[0] + ' [-q] -i <inputfile> -o <outputfile>'
+      sys.exit(2)
+
+   for opt, arg in opts:
+      if opt == '-h':
+         print 'Usage: ' + sys.argv[0] + '[-q] -i <inputfile> -o <outputfile>'
+         sys.exit()
+      elif opt in ("-i", "--ifile"):
+         file_in  = arg
+      elif opt in ("-o", "--ofile"):
+         file_out = arg
+
+   if opt not in ("-q", "--quiet"):
+      print 'Input  file: ', file_in
+      print 'Output file: ', file_out
+
+	
+
 def create_token(token):
    data_type     = ['int', 'char', 'float', 'string', 'const']
    special_chars = ['{', '}', '[', ']', '(', ')']
@@ -24,9 +50,20 @@ def create_token(token):
 
    return "<id;%s>" % (token)
 
+
+
+
 # main program
 if __name__ == "__main__":
-   source = open('test.c', 'r');
+	
+   global file_in, file_out
+   file_in  = 'test.c'
+   file_out = 'saida.tokens'
+
+   if (len(sys.argv) > 1):
+      get_cmdline_args(sys.argv[1:])
+   
+   source = open(file_in, 'r');
 
    for line in source:
       token = ""
