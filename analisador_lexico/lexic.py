@@ -2,7 +2,7 @@
 
 import sys, getopt
 
-# Parse dos nomes de arquivos de entrada e saída na linha de comado
+# Parse dos nomes de arquivos de entrada e saida na linha de comado
 def get_cmdline_args(argv):
 
    try:
