@@ -1,14 +1,16 @@
 #Analisador Léxico
 
-##Definição do trabalho
-Fazer o analisador léxico para a linguagem definida logo abaixo,
+##Definição do trabalho 1
+Fazer o analisador léxico para a linguagem definida logo abaixo.
+
 o analisador **deve** ser implementado em uma função que retorna um
 token a cada chamada.
 
 O programa principal **deve** ser um loop até o final do arquivo com
-chamadas sucessivas à função do analisador léxico. Após cada chamada
-da função, o programa principal deve gravar os token no arquivo
-*saída.tokens*.
+chamadas sucessivas à função do analisador léxico. 
+
+Após cada chamada da função, o programa principal deve gravar os token
+no arquivo *saída.tokens*.
 
 O programa deve indicar erros léxicos, mostrando em qual linha ocorreu,
 o programa **pára no primeiro erro** encontrado 

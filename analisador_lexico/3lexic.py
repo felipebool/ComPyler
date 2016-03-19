@@ -3,7 +3,7 @@
 # Language definition ----------------------------------------------------------
 special_chars = ['{', '}', '(', ')', ';']
 types         = ['int', 'float', 'char', 'string']
-reserved      = ['for', 'while', 'if', 'main']
+reserved      = ['for', 'while', 'do', 'if', 'else', 'main']
 op_arit       = ['+', '-', '*', '/', '#']
 
 OPEN_COMMENT  = '/*'
@@ -59,9 +59,9 @@ if __name__ == "__main__":
             can_be_end_comment = False
 
          if not ch in WHITESPACE and not is_comment:
-            if ch == ';':
-               
-            token += ch
+            if ch == ';':   
+               token += ch
+
          else:
             if len(token) > 0:
                print "\"%s\" - %d" %(token, len(token))

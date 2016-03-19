@@ -2,8 +2,13 @@
 
 import sys, getopt
 
+file_in  = 'test.c'
+file_out = 'saida.tokens'
+
 # Parse dos nomes de arquivos de entrada e saida na linha de comado
 def get_cmdline_args(argv):
+
+   global file_in, file_out
 
    try:
       opts, args = getopt.getopt(argv,"hi:o:q:",["ifile=","ofile=","quiet="])
@@ -28,8 +33,9 @@ def get_cmdline_args(argv):
 
 def create_token(token):
    data_type     = ['int', 'char', 'float', 'string', 'const']
-   special_chars = ['{', '}', '[', ']', '(', ')']
+   special_chars = ['{', '}', '[', ']', '(', ')', ';']
    op_arit       = ['+', '-', '*', '/', '#']
+   reserved      = ['for', 'while', 'do', 'if', 'else', 'main']
 
    print "token: %s" % (token)
 
@@ -56,10 +62,6 @@ def create_token(token):
 # main program
 if __name__ == "__main__":
 	
-   global file_in, file_out
-   file_in  = 'test.c'
-   file_out = 'saida.tokens'
-
    if (len(sys.argv) > 1):
       get_cmdline_args(sys.argv[1:])
    
