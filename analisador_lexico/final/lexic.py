@@ -56,6 +56,24 @@ def create_token(token):
 
    return "<id;%s>" % (token)
 
+def obterToken(fp, ftell):
+   delim = ['{', '}', '(', ')', ';']
+
+   init_token = False
+
+   # reposiciona o fp no arquivo
+   fp.seek(ftell)
+
+   while True:
+      ch = fp.read(1)
+      if (ch = ' '):
+         if (init_token):
+            # retorno token
+      
+
+      if init_token:
+         break
+         
 
 
 
@@ -66,17 +84,16 @@ if __name__ == "__main__":
       get_cmdline_args(sys.argv[1:])
    
    source = open(file_in, 'r');
+   is_digit           = False
+   start_token        = True
+   is_comment         = False
+   can_be_comment     = False
+   can_be_end_comment = False
+   token = ""
 
    for line in source:
-      token = ""
-
-      is_digit           = False
-      start_token        = True
-      is_comment         = False
-      can_be_comment     = False
-      can_be_end_comment = False
-
       for ch in ' '.join(line.split()):
+         print source.tell()
          if (not is_comment):
             if (ch == '/'):
                can_be_comment = True
@@ -101,7 +118,7 @@ if __name__ == "__main__":
 
                else:
                   token += ch
-                  print ch
+                  #print ch
 
          # comment
          else:
