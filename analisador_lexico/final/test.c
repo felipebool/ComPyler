@@ -8,41 +8,27 @@ const   const3 = 1;
 
 int     function1()   {
    float var1;
-   /* do stuff here */
 }
 
 int    function2() {
    float vara;
    float varb;
-   /* do stuff here */
 }
 
-int function3() {/* do stuff here */}
+int function3() {}
 
 int
-function4()/*weird placed comment*/{/* do stuff here */
+function4(){
 }
 
-/*
-asdfasdf
-asdfasdfasdfa
-as
-
-
-
-
-asdf
-
-*/
-
-
-main            {/*asdfasdf
-asdfasdf
-
-*/
+main            {
+   string x;
    int a;
    int b;
    float c;
+
+   x = "bola"
+
 
    a= b + c;
    a =b+c;
@@ -52,6 +38,12 @@ asdfasdf
    b) {
       b = c;
    }
+
+   if (a==
+   b) {
+      b = c;
+   }
+
 
    while (a < 3) {a++;}
 

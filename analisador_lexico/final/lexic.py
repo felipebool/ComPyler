@@ -1,130 +1,91 @@
 #!/usr/bin/python
 
-import sys, getopt
+import re
 
-file_in  = 'test.c'
-file_out = 'saida.tokens'
+# TODO list
+# - ignorar comentarios
+# - casos que nao funciona
+#  -- a+c
+#  -- a++
+#  -- +c
+#  -- a==
 
-# Parse dos nomes de arquivos de entrada e saida na linha de comado
-def get_cmdline_args(argv):
 
-   global file_in, file_out
 
-   try:
-      opts, args = getopt.getopt(argv,"hi:o:q:",["ifile=","ofile=","quiet="])
-   except getopt.GetoptError:
-      print 'Usage: ' + sys.argv[0] + ' [-q] -i <inputfile> -o <outputfile>'
-      sys.exit(2)
+def unknown_token(tk):
+   return "<UNKNOW;%s>" % (tk)
 
-   for opt, arg in opts:
-      if opt == '-h':
-         print 'Usage: ' + sys.argv[0] + '[-q] -i <inputfile> -o <outputfile>'
-         sys.exit()
-      elif opt in ("-i", "--ifile"):
-         file_in  = arg
-      elif opt in ("-o", "--ofile"):
-         file_out = arg
+# testa tipo do token e o retorna formatado
+def create_token(tk):
+   types  = ['int', 'float', 'char', 'string', 'const']
+   reserv = ['for', 'if', 'else', 'while']
+   delim  = ['{', '}', '(', ')', ';']
 
-   if opt not in ("-q", "--quiet"):
-      print 'Input  file: ', file_in
-      print 'Output file: ', file_out
+   op_arit  = ['+', '-', '*', '=']
+   op_rel   = ['>', '<', '>=', '<=',]
+   op_log   = ['==', '!=']
 
-	
+   if tk in types:
+      return "<type;%s>" % (tk)
 
-def create_token(token):
-   data_type     = ['int', 'char', 'float', 'string', 'const']
-   special_chars = ['{', '}', '[', ']', '(', ')', ';']
-   op_arit       = ['+', '-', '*', '/', '#']
-   reserved      = ['for', 'while', 'do', 'if', 'else', 'main']
+   if tk in op_arit:
+      return "<op_arit;%s>" % (tk)
 
-   print "token: %s" % (token)
+   if tk in op_rel:
+      return "<op_rel;%s>" % (tk)
 
-   if (token in data_type):
-      return "<type;%s>" % (token)
+   if tk in op_log:
+      return "<op_log;%s>" % (tk)
 
-   if (token in special_chars):
-      return "<%s;>" % (token)
+   if tk in delim:
+      return "<%s;>" % (tk)
 
-   if (token in op_arit):
-      return "<op_arit;%s>" % (token)
+   if tk in reserv:
+      return "<%s;>" % (tk)
 
-   if (token == '='):
-      return "<=;>"
+   if tk.isdigit():
+      return "<num;%s>" % (tk)
 
-   if (token == 'main'):
-      return "<main;%s>" % (token)
+   id_pattern = re.compile('[a-zA-Z]+[a-zA-Z0-9]*')
+   if id_pattern.match(tk):
+      return "<id;%s>" % (tk)
 
-   return "<id;%s>" % (token)
+   return unknown_token(tk)
 
-def obterToken(fp, ftell):
+def obter_token(fp, fpos):
    delim = ['{', '}', '(', ')', ';']
-
-   init_token = False
-
-   # reposiciona o fp no arquivo
-   fp.seek(ftell)
-
-   while True:
-      ch = fp.read(1)
-      if (ch = ' '):
-         if (init_token):
-            # retorno token
-      
-
-      if init_token:
-         break
-         
-
-
-
-# main program
-if __name__ == "__main__":
-	
-   if (len(sys.argv) > 1):
-      get_cmdline_args(sys.argv[1:])
-   
-   source = open(file_in, 'r');
-   is_digit           = False
-   start_token        = True
-   is_comment         = False
-   can_be_comment     = False
-   can_be_end_comment = False
    token = ""
 
-   for line in source:
-      for ch in ' '.join(line.split()):
-         print source.tell()
-         if (not is_comment):
-            if (ch == '/'):
-               can_be_comment = True
+   is_token = False
+   fp.seek(fpos)
 
-            if (can_be_comment and ch == '*'):
-               can_be_comment = False
-               is_comment = True
+   while True:
+      # aqui vai a logica que ignora comentarios
+      ch = fp.read(1)
 
-            # valid code
-            if (not is_comment and not can_be_comment):
-               if (ch == ' ' or ch == ';'):
-                  start_token = True
-                  create_token(token)
-                  token = ""
+      if not ch == '\n':
+         if ch in delim:
+            if len(token) == 0:
+               return [create_token(ch), fp.tell()]
+            else:
+               return [create_token(token), fp.tell() - 1]
 
-               elif (ch.isdigit() and start_token):
-                  token += ch
+         if not ch == ' ':
+            is_token = True
 
-               elif (ch == '='):
-                  create_token(ch)
-                  token = ""
+         if ch == ' ' and is_token:
+            return [create_token(token), fp.tell()]
 
-               else:
-                  token += ch
-                  #print ch
+         if is_token:
+            token += ch
 
-         # comment
-         else:
-            if (ch == '*'):
-               can_be_end_comment = True
 
-            if (ch == '/' and can_be_end_comment == True):
-               is_comment = False
+if __name__ == "__main__":
+   source = open('test.c', 'r')
+
+   fetch = obter_token(source, 0)
+   while True:
+      #print "\"" + fetch[0] + "\"" + ':' +  str(fetch[1])
+      print fetch[0]
+      fetch = obter_token(source, fetch[1])
 
