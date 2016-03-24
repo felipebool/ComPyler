@@ -10,8 +10,8 @@ import re
 #  -- +c
 #  -- a==
 # - fazer as opcoes -i e -o
-# - fazer teste para string (create_token)
-# - fazer test para char (create_token)
+# - fazer teste para string (create_token): bol
+# - fazer test para char (create_token): bol
 
 # debug, ajuda a evidenciar os casos que a gente nao cobre.
 # podemos usa-la mais pra frente pra retornar erro lexico...
@@ -27,6 +27,10 @@ def create_token(tk):
    op_arit  = ['+', '-', '*', '=']
    op_rel   = ['>', '<', '>=', '<=',]
    op_log   = ['==', '!=']
+
+   id_pattern = re.compile('[a-zA-Z]+[a-zA-Z0-9]*')
+   str_pattern = re.compile('\"[a-zA-Z]*\"')
+   char_pattern = re.compile('\'[a-z0-9]\'')
 
    if tk in types:
       return "<type;%s>" % (tk)
@@ -49,9 +53,15 @@ def create_token(tk):
    if tk.isdigit():
       return "<num;%s>" % (tk)
 
-   id_pattern = re.compile('[a-zA-Z]+[a-zA-Z0-9]*')
    if id_pattern.match(tk):
       return "<id;%s>" % (tk)
+
+   if str_pattern.match(tk):
+      return "<str;%s>" % (tk)
+
+   if char_pattern.match(tk):
+      return "<char;%s>" % (tk)
+
 
    return unknown_token(tk)
 
