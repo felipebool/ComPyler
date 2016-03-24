@@ -9,9 +9,12 @@ import re
 #  -- a++
 #  -- +c
 #  -- a==
+# - fazer as opcoes -i e -o
+# - fazer teste para string (create_token)
+# - fazer test para char (create_token)
 
-
-
+# debug, ajuda a evidenciar os casos que a gente nao cobre.
+# podemos usa-la mais pra frente pra retornar erro lexico...
 def unknown_token(tk):
    return "<UNKNOW;%s>" % (tk)
 
