@@ -9,9 +9,11 @@ import re
 #  -- a++
 #  -- +c
 #  -- a==
-# - fazer as opcoes -i e -o
+# - fazer as opcoes -i e -o: alexandre
 # - fazer teste para string (create_token): bol
 # - fazer test para char (create_token): bol
+# - implementar contagem de linhas
+# - implementar contagem de caracteres
 
 # debug, ajuda a evidenciar os casos que a gente nao cobre.
 # podemos usa-la mais pra frente pra retornar erro lexico...
