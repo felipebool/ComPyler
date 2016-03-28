@@ -5,6 +5,8 @@ import sys, getopt
 file_in  = 'test.c'
 file_out = 'saida.tokens'
 
+# ==================================================================== #
+
 # Parse dos nomes de arquivos de entrada e saida na linha de comado
 def get_cmdline_args(argv):
 
@@ -30,7 +32,7 @@ def get_cmdline_args(argv):
 		print 'Output file: ', file_out
 
 
-
+# ==================================================================== #
 
 
 def get_token(f):
@@ -81,7 +83,6 @@ def get_token(f):
 		return "<op_arit;%s>" % (ch)
 		
 		
-		
 	### Operadores logicos e atribuicao
 	if ch in op_logic or ch == '=':
 		tk = ch + f.read(1)
@@ -127,11 +128,13 @@ def get_token(f):
 		else:
 			return "<id;%s>" % (tk)
 
+
 	### Nenhuma das opções acima
 	return ch
 
 
-
+# ==================================================================== #
+# ==================================================================== #
 
 
 # main program
@@ -150,3 +153,6 @@ if __name__ == "__main__":
 				break
 
 			print token
+
+# ==================================================================== #
+# ==================================================================== #
