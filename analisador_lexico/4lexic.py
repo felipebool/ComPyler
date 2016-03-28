@@ -1,0 +1,140 @@
+#!/usr/bin/python
+
+import sys, getopt
+
+file_in  = 'test.c'
+file_out = 'saida.tokens'
+
+# Parse dos nomes de arquivos de entrada e saida na linha de comado
+def get_cmdline_args(argv):
+
+	global file_in, file_out
+
+	try:
+		opts, args = getopt.getopt(argv,"hi:o:q:",["ifile=","ofile=","quiet="])
+	except getopt.GetoptError:
+		print 'Usage: ' + sys.argv[0] + ' [-q] -i <inputfile> -o <outputfile>'
+		sys.exit(2)
+
+	for opt, arg in opts:
+		if opt == '-h':
+			print 'Usage: ' + sys.argv[0] + '[-q] -i <inputfile> -o <outputfile>'
+			sys.exit()
+		elif opt in ("-i", "--ifile"):
+			file_in  = arg
+		elif opt in ("-o", "--ofile"):
+			file_out = arg
+
+	if opt not in ("-q", "--quiet"):
+		print 'Input  file: ', file_in
+		print 'Output file: ', file_out
+
+
+
+
+
+def get_token(f):
+
+	data_type  = ['int', 'char', 'float', 'const']
+	spec_chars = ['{', '}', '[', ']', '(', ')', ';']
+	op_arit    = ['+', '++', '-', '--', '*', '/', '#']
+	op_logic   = ['>', '<', '>=', '<=', '==', '!', '!=']
+	reserved   = ['for', 'while', 'do', 'if', 'else', 'main']
+
+	ign_list   = [' ', '\t', '\n']
+
+	# Ignora espacos, tabulacao e quebra de linha
+	while True:
+		ch = f.read(1)
+		if ch not in ign_list:
+			break
+			
+	### Trata fim de arquivo ###
+	if not ch:
+		return "EOF"
+
+		
+	### Operadores aritmeticos ###
+	if ch in op_arit:
+		tk = ch
+
+		if tk in ['/', '+', '-']:
+			pos = f.tell()
+			tk += f.read(1)
+			
+			# Trata se eh comentario de bloco
+			if tk == '/*':
+				while tk != '*/':
+					ch = f.read(1)
+					if not ch:
+						return "EOF"
+					tk = tk[1:] + ch
+				return get_token(f)
+			
+			# Trata operadores com dois caracteres: ++ e --
+			if tk in op_arit:
+				return "<op_arit;%s>" % (tk)
+			else:
+				f.seek(pos)
+
+		# Operadores de um soh caractere
+		return "<op_arit;%s>" % (ch)
+		
+		
+		
+	### Operadores logicos e atribuicao
+	if ch in op_logic or ch == '=':
+		tk = ch + f.read(1)
+		if tk in op_logic:
+			return "<op_log;%s>" % (tk)
+		else:
+			f.seek(f.tell() - 1)
+			if ch == '=':
+				return "<attrib;%s>" % (ch)
+			else:
+				return "<op_log;%s>" % (ch)
+
+
+	### Caracteres especiais ###
+	if ch in spec_chars:
+		tk = ch
+		return "<%s;>" % (tk)
+
+
+	### Numeros (inteiros e ponto flutuante) ###
+	if ch.isdigit():
+		tk  = ch
+		while ch.isdigit() or ch == '.':
+			ch = f.read(1)
+			tk += ch
+		tk = tk[:-1]
+		f.seek(f.tell() - 1)
+		return "<num;%s>" % (tk)
+
+
+	### Tipo de dado
+	### Palavras reservadas
+
+	
+	return ch
+
+
+
+
+
+# main program
+if __name__ == "__main__":
+	
+	if (len(sys.argv) > 1):
+		get_cmdline_args(sys.argv[1:])
+
+	with open(file_in) as f:
+
+		while True:
+
+			token = get_token(f)
+
+			if token == 'EOF':
+				break
+
+			print token

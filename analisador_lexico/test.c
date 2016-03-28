@@ -2,7 +2,7 @@
    int var2;
 int var3;
 
-const const1 = 3;
+const const1 = 3.666;
 const  const2 = 2;
 const   const3 = 1;
 
@@ -24,9 +24,11 @@ function4()/*weird placed comment*/{/* do stuff here */
 }
 
 /*
-asdfasdf
-asdfasdfasdfa
-as
+Esse eh o
+conteudo
+
+de um comentatio
+* 	*
 
 
 
@@ -53,10 +55,10 @@ asdfasdf
       b = c;
    }
 
-   while (a < 3) {a++;}
+   while (a < 32) {a++;}
 
    for (i = 0;
-   i < 3;
+   i < 357;
    i++) {
 
    b = b;

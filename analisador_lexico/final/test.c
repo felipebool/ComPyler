@@ -48,7 +48,7 @@ main            {
    while (a < 3) {a++;}
 
    for (i = 0;
-   i < 3;
+   i < 35;
    i++) {
 
    b = b;
