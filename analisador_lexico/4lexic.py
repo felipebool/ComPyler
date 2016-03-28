@@ -40,7 +40,7 @@ def get_token(f):
 	op_arit    = ['+', '++', '-', '--', '*', '/', '#']
 	op_logic   = ['>', '<', '>=', '<=', '==', '!', '!=']
 	reserved   = ['for', 'while', 'do', 'if', 'else', 'main']
-
+	separators = [';', ',']
 	ign_list   = [' ', '\t', '\n']
 
 	# Ignora espacos, tabulacao e quebra de linha
@@ -112,10 +112,22 @@ def get_token(f):
 		return "<num;%s>" % (tk)
 
 
-	### Tipo de dado
-	### Palavras reservadas
+	### Tipos de dados, Palavras reservadas, Identificadores
+	if ch.isalpha():
+		tk = ch
+		while ch and ch not in separators and ch not in spec_chars and ch not in ign_list:
+			ch = f.read(1)
+			tk += ch
+		tk = tk[:-1]
+		f.seek(f.tell() - 1)
+		if tk in data_type:
+			return "<type;%s>" % (tk)
+		elif tk in reserved: 
+			return "<reserved;%s>" % (tk)
+		else:
+			return "<id;%s>" % (tk)
 
-	
+	### Nenhuma das opções acima
 	return ch
 
 
