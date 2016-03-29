@@ -45,6 +45,7 @@ asdfasdf
    int a;
    int b;
    float c;
+   int 9cagou;
 
    a= b + c;
    a =b+c;
@@ -63,4 +64,7 @@ asdfasdf
 
    b = b;
    }
+
+    string bola = "asdfasdf";
+    char lala = 'a';
 }
