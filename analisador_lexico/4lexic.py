@@ -2,12 +2,15 @@
 
 import sys, getopt
 
+# ==================================================================== #
+### Variáveis Globais 
+
 file_in  = 'test.c'
 file_out = 'saida.tokens'
 
 # ==================================================================== #
+### Parse dos nomes de arquivos de entrada e saida na linha de comado
 
-# Parse dos nomes de arquivos de entrada e saida na linha de comado
 def get_cmdline_args(argv):
 
 	global file_in, file_out
@@ -33,7 +36,7 @@ def get_cmdline_args(argv):
 
 
 # ==================================================================== #
-
+### Funcao get_token() : Retorna um token do arquivo a cada chamada
 
 def get_token(f):
 
@@ -59,11 +62,9 @@ def get_token(f):
 	### Operadores aritmeticos ###
 	if ch in op_arit:
 		tk = ch
-
 		if tk in ['/', '+', '-']:
 			pos = f.tell()
 			tk += f.read(1)
-			
 			# Trata se eh comentario de bloco
 			if tk == '/*':
 				while tk != '*/':
@@ -72,18 +73,16 @@ def get_token(f):
 						return "EOF"
 					tk = tk[1:] + ch
 				return get_token(f)
-			
 			# Trata operadores com dois caracteres: ++ e --
 			if tk in op_arit:
 				return "<op_arit;%s>" % (tk)
 			else:
 				f.seek(pos)
-
 		# Operadores de um soh caractere
 		return "<op_arit;%s>" % (ch)
 		
 		
-	### Operadores logicos e atribuicao
+	### Operadores logicos e atribuicao ###
 	if ch in op_logic or ch == '=':
 		tk = ch + f.read(1)
 		if tk in op_logic:
@@ -104,7 +103,7 @@ def get_token(f):
 
 	### Numeros (inteiros e ponto flutuante) ###
 	if ch.isdigit():
-		tk  = ch
+		tk = ch
 		while ch.isdigit() or ch == '.':
 			ch = f.read(1)
 			tk += ch
@@ -113,7 +112,7 @@ def get_token(f):
 		return "<num;%s>" % (tk)
 
 
-	### Tipos de dados, Palavras reservadas, Identificadores
+	### Tipos de dados, Palavras reservadas, Identificadores ###
 	if ch.isalpha():
 		tk = ch
 		while ch and ch not in separators and ch not in spec_chars and ch not in ign_list:
@@ -134,10 +133,9 @@ def get_token(f):
 
 
 # ==================================================================== #
-# ==================================================================== #
+### Rotina principal -> Main ========================================= #
 
 
-# main program
 if __name__ == "__main__":
 	
 	if (len(sys.argv) > 1):

@@ -17,11 +17,12 @@ import re
 
 # debug, ajuda a evidenciar os casos que a gente nao cobre.
 # podemos usa-la mais pra frente pra retornar erro lexico...
-def unknown_token(tk):
-   return "<UNKNOW;%s>" % (tk)
+
+   
 
 # testa tipo do token e o retorna formatado
 def create_token(tk):
+
    types  = ['int', 'float', 'char', 'string', 'const']
    reserv = ['for', 'if', 'else', 'while']
    delim  = ['{', '}', '(', ')', ';']
@@ -30,8 +31,8 @@ def create_token(tk):
    op_rel   = ['>', '<', '>=', '<=',]
    op_log   = ['==', '!=']
 
-   id_pattern = re.compile('[a-zA-Z]+[a-zA-Z0-9]*')
-   str_pattern = re.compile('\"[a-zA-Z]*\"')
+   id_pattern   = re.compile('[a-zA-Z]+[a-zA-Z0-9]*')
+   str_pattern  = re.compile('\"[a-zA-Z]*\"')
    char_pattern = re.compile('\'[a-z0-9]\'')
 
    if tk in types:
@@ -65,7 +66,9 @@ def create_token(tk):
       return "<char;%s>" % (tk)
 
 
-   return unknown_token(tk)
+   return "<UNKNOW;%s>" % (tk)
+
+
 
 def obter_token(fp, fpos):
    delim = ['{', '}', '(', ')', ';']
