@@ -30,9 +30,9 @@ def get_cmdline_args(argv):
 		elif opt in ("-o", "--ofile"):
 			file_out = arg
 
-	if opt not in ("-q", "--quiet"):
-		print 'Input  file: ', file_in
-		print 'Output file: ', file_out
+#	if opt not in ("-q", "--quiet"):
+#		print 'Input  file: ', file_in
+#		print 'Output file: ', file_out
 
 
 # ==================================================================== #
@@ -40,8 +40,8 @@ def get_cmdline_args(argv):
 
 def get_token(f):
 
-	data_type  = ['int', 'char', 'float', 'const']
-	spec_chars = ['{', '}', '[', ']', '(', ')', ';']
+	data_type  = ['int', 'char', 'float', 'const', 'string']
+	spec_chars = ['{', '}', '[', ']', '(', ')', ';', '"', '\'']
 	op_arit    = ['+', '++', '-', '--', '*', '/', '#']
 	op_logic   = ['>', '<', '>=', '<=', '==', '!', '!=']
 	reserved   = ['for', 'while', 'do', 'if', 'else', 'main']
@@ -128,7 +128,7 @@ def get_token(f):
 			return "<id;%s>" % (tk)
 
 
-	### Nenhuma das opções acima
+	### Nenhuma das opcoes acima
 	return ch
 
 
