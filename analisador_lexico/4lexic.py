@@ -1,5 +1,9 @@
 #!/usr/bin/python
 
+# ------------------------------------------------------------------------------
+# TODO: CRIAR A TABELA DE SÍMBOLO
+# ------------------------------------------------------------------------------
+
 import sys, getopt
 
 file_in  = 'test.c'
@@ -26,17 +30,10 @@ def get_cmdline_args(argv):
 			file_in  = arg
 		elif opt in ("-o", "--ofile"):
 			file_out = arg
-
-#	if opt not in ("-q", "--quiet"):
-#		print 'Input  file: ', file_in
-#		print 'Output file: ', file_out
-
-
 # ==================================================================== #
 
 
 def get_token(f):
-
 	data_type  = ['int', 'char', 'float', 'const', 'string']
 	spec_chars = ['{', '}', '[', ']', '(', ')', ';', '"', '\'']
 	op_arit    = ['+', '++', '-', '--', '*', '/', '#']
@@ -45,26 +42,20 @@ def get_token(f):
 	separators = [';', ',']
 	ign_list   = [' ', '\t', '\n']
 
-	# Ignora espacos, tabulacao e quebra de linha
 	while True:
 		ch = f.read(1)
 		if ch not in ign_list:
 			break
-			
-	### Trata fim de arquivo ###
+
 	if not ch:
 		return "EOF"
 
-		
 	### Operadores aritmeticos ###
 	if ch in op_arit:
 		tk = ch
-
 		if tk in ['/', '+', '-']:
-			pos = f.tell()
 			tk += f.read(1)
-			
-			# Trata se eh comentario de bloco
+			# Trata se eh comentario de bloco - ERROR DE COMENTARIO TRATA AQUI
 			if tk == '/*':
 				while tk != '*/':
 					ch = f.read(1)
@@ -72,16 +63,13 @@ def get_token(f):
 						return "EOF"
 					tk = tk[1:] + ch
 				return get_token(f)
-			
 			# Trata operadores com dois caracteres: ++ e --
 			if tk in op_arit:
 				return "<op_arit;%s>" % (tk)
 			else:
-				f.seek(pos)
-
+				f.seek(f.tell() - 1)
 		# Operadores de um soh caractere
 		return "<op_arit;%s>" % (ch)
-		
 		
 	### Operadores logicos e atribuicao
 	if ch in op_logic or ch == '=':
@@ -95,14 +83,12 @@ def get_token(f):
 			else:
 				return "<op_log;%s>" % (ch)
 
-
 	### Caracteres especiais ###
 	if ch in spec_chars:
 		tk = ch
 		return "<%s;>" % (tk)
 
-
-	### Numeros (inteiros e ponto flutuante) ###
+	### Numeros (inteiros e ponto flutuante) ### ERRO
 	if ch.isdigit():
 		tk  = ch
 		while ch.isdigit() or ch == '.':
