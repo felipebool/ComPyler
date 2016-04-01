@@ -45,7 +45,7 @@ asdfasdf
    int a;
    int b;
    float c;
-   int 9cagou
+   int notcagou
 =
 12
 ;

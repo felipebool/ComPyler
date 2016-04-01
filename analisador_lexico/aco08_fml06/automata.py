@@ -2,50 +2,42 @@
 
 import grammar as gram
 
-# TODO: this function must keep track of the lines skipped
+# TODO: remove this 
+import sys
+
 def skip_blank(fp):
    """
       skip_blank puts fp in the next non blank character
    """
-   ign_list = [' ', '\t', '\n']
-
    while True:
-      ch = fp.read(1)
-      # TODO: use ch.isspace()
-      if ch not in ign_list:
+      symbol = fp.read(1)
+      if not symbol.isspace():
          fp.seek(fp.tell() - 1)
          break
 # ------------------------------------------------------------------------------
 
-# TODO: this function must keep track of the lines skipped
 def skip_comment(fp):
    """
       skip_comment put fp in the next non blank character after
       the end comment, if end comment is missing, skip_comment
       return -1
    """
-   can_be_end_comment = False
-   is_comment = True
+   window = fp.read(1)
 
    while True:
       symbol = fp.read(1)
 
-      # end of file error
       if symbol == '':
-         return {'comment': False}
+         return {'error': 'Lexical error: you should check your comments'}
 
-      if symbol == '*':
-         can_be_end_comment = True
+      window += symbol
+
+      if window != '*/':
+         window = window[1]
       else:
-         can_be_end_comment = False
-
-      if symbol == '/' and can_be_end_comment:
-         is_comment = False
-
-      if not is_comment:
-         skip_blank(fp)
-         return
+         break
 # ------------------------------------------------------------------------------
+
 
 def is_alpha(fp, ch):
    """
@@ -55,32 +47,37 @@ def is_alpha(fp, ch):
       the next not blank character.
    """
    symbol = ch
-   lexeme = symbol
+   lexeme = ''
 
    while True:
       # end of file error
       if symbol == '':
-         break
+         return {'error': 'Lexical error: EOF reached, maybe you forgot something...'}
 
       if symbol in gram.forbidden:
-         error = "Lexical error: \'%c\' is not part of \
-                  the alphabet, champz!" % (symbol)
-         return {'error': error}
+         return {'error': "Lexical error: \'%c\' is not part of the alphabet, champz!" % (symbol)}
 
       if symbol in gram.delimiters:
+         fp_pos = fp.tell()
+         break
+
+      if symbol in gram.op_arit or symbol in gram. or symbol == '=':
+         fp_pos = fp.tell()
          break
 
       lexeme += symbol
       symbol = fp.read(1)
 
    skip_blank(fp)
-   if lexeme in gram.data_type:
-      token = "<type;%s>" % (lexeme)
-   elif lexeme in gram.reserved: 
-      token = "<reserved;%s>" % (lexeme)
-   else:
-      token = "<id;%s>" % (lexeme)
 
+   if lexeme in gram.data_type:
+      token = {'token': "<type;%s>" % (lexeme)}
+   elif lexeme in gram.reserved: 
+      token = {'token': "<reserved;%s>" % (lexeme)}
+   else:
+      token = {'token': "<id;%s>" % (lexeme)}
+
+   fp.seek(fp_pos - 1)
    return token
 # ------------------------------------------------------------------------------
 
@@ -92,57 +89,48 @@ def is_digit(fp, ch):
    """
    has_point = False
    symbol = ch
-   lexeme = symbol
+   lexeme = ""
+   token = {}
 
    while True:
-      # end of file
+      # end of file (is this an error?)
       if symbol == '':
+         token = {'eof': True}
          break
 
       if symbol in gram.forbidden:
-         error = "Lexical error: \'%c\' is not part of \
-                  the alphabet, champz!" % (symbol)
-         return {'error': error}
+         return {'error': "Lexical error: \'%c\' is not part of the alphabet, champz!" % (symbol)}
 
-      if symbol.isdigit():
-         lexeme += symbol
+      if symbol in gram.delimiters:
+         fp_pos = fp.tell()
+         fp.seek(fp_pos - 1)
+         break
 
-      else:
-         if symbol == '.':
-            fp_pos = fp.tell()
+      lexeme += symbol
 
-            if has_point:
-               error = "Lexical error: maybe you have a few \
-                        extra dots inside a number, bro!"
-               return {'error': error}
+      if symbol.isalpha():
+         return {'error': "Lexical error: there is a character inside your number, pal!"}
 
-            lexeme += symbol
+      if symbol == '.':
+         if has_point:
+            return {'error': "Lexical error: maybe you have a few extra dots inside a number, bro!"}
+         has_point = True
 
-            # check if character after point is another number
-            symbol = fp.read(1)
-            if not symbol.isdigit():
-               error = "Lexical error: your number has a point \
-               not followed by more numbers, mate!"
-               return {'error': error}
-            else:
-               fp.seek(fp_pos)
-
-            has_point = True
-
-         if symbol in gram.delimiters:
-            break
-
-         if symbol.isalpha():
-            error = "Lexical error: there is a character inside \
-                     your number, pal!"
-            return error
-
-         lexeme += symbol
+         fp_pos = fp.tell()
          symbol = fp.read(1)
+
+         if not symbol.isdigit():
+            return {'error': "Lexical error: your number has a point not followed by more numbers, mate!"}
+         else:
+            fp.seek(fp_pos)
+
+      if symbol in gram.delimiters:
+         break
+
+      symbol = fp.read(1)
    
    skip_blank(fp)
-
-   token = "<num;%s>" % (lexeme)
+   token = {'token': "<num;%s>" % (lexeme)}
    return token
 # ------------------------------------------------------------------------------
 
@@ -155,16 +143,17 @@ def is_arithmetic_op(fp, ch):
    lexeme = symbol
 
    if symbol in ['*', '#']:
-      token = "<op_arit;%s>" % lexeme
+      token = {'token': "<op_arit;%s>" % lexeme}
 
    if symbol in ['/', '+', '-']:
       lexeme += fp.read(1)
 
       if lexeme == '/*':
-         return skip_comment(fp)
+         skip_comment(fp)
+         token = {'comment': True}
 
       if lexeme in gram.op_arit:
-         token = "<op_arit;%s>" % (lexeme)
+         token = {'token': "<op_arit;%s>" % (lexeme)}
 
    skip_blank(fp)
    return token
@@ -173,39 +162,34 @@ def is_arithmetic_op(fp, ch):
 def is_logical_op_or_attribution(fp, ch):
    symbol = ch
    lexeme = symbol
+   token = {}
 
    if lexeme in gram.op_logic:
-      token = "<op_log;%s>" % (lexeme)
+      token = {'token': "<op_log;%s>" % (lexeme)}
 
    if lexeme == '=':
-      token = "<attr;%s>" % (lexeme)
+      token = {'token': "<attr;%s>" % (lexeme)}
 
    lexeme += fp.read(1)
 
    if symbol in gram.forbidden:
-      error = "Lexical error: \'%c\' is not part of \
-               the alphabet, champz!" % (symbol)
-      return {'error': error}   
+      return {'error': "Lexical error: \'%c\' is not part of the alphabet, champz!" % (symbol)}
 
    if lexeme in gram.op_logic:
-      token = "<op_log;%s>" % (lexeme)
-
-   # TODO: here we can have errors like: <#
+      token = {'token': "<op_log;%s>" % (lexeme)}
 
    skip_blank(fp)
    return token
 # ------------------------------------------------------------------------------
 
 def is_special_char(ch):
-   symbol = ch
-   lexeme = symbol
-   token = "<;%s>" % (lexeme)
-   return token
+   return {'token': "<;%s>" % (ch)}
 # ------------------------------------------------------------------------------
 
 def get_token(fp):
    skip_blank(fp)
    symbol = fp.read(1)
+   token = {}
 
    # not part 
    if symbol in gram.forbidden:
@@ -219,7 +203,7 @@ def get_token(fp):
       token = is_digit(fp, symbol)
 
    elif symbol in gram.op_arit:
-      token = is_arithmetical_op(fp, symbol)
+      token = is_arithmetic_op(fp, symbol)
 
    elif symbol in gram.op_logic or symbol == '=':
       token = is_logical_op_or_attribution(fp, symbol)
