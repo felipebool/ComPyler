@@ -6,12 +6,15 @@
 
 import sys, getopt
 
+# ==================================================================== #
+### Variáveis Globais 
+
 file_in  = 'test.c'
 file_out = 'saida.tokens'
 
 # ==================================================================== #
+### Parse dos nomes de arquivos de entrada e saida na linha de comado
 
-# Parse dos nomes de arquivos de entrada e saida na linha de comado
 def get_cmdline_args(argv):
 
 	global file_in, file_out
@@ -31,7 +34,7 @@ def get_cmdline_args(argv):
 		elif opt in ("-o", "--ofile"):
 			file_out = arg
 # ==================================================================== #
-
+### Funcao get_token() : Retorna um token do arquivo a cada chamada
 
 def get_token(f):
 	data_type  = ['int', 'char', 'float', 'const', 'string']
@@ -90,7 +93,7 @@ def get_token(f):
 
 	### Numeros (inteiros e ponto flutuante) ### ERRO
 	if ch.isdigit():
-		tk  = ch
+		tk = ch
 		while ch.isdigit() or ch == '.':
 			ch = f.read(1)
 			tk += ch
@@ -99,7 +102,7 @@ def get_token(f):
 		return "<num;%s>" % (tk)
 
 
-	### Tipos de dados, Palavras reservadas, Identificadores
+	### Tipos de dados, Palavras reservadas, Identificadores ###
 	if ch.isalpha():
 		tk = ch
 		while ch and ch not in separators and ch not in spec_chars and ch not in ign_list:
@@ -120,10 +123,9 @@ def get_token(f):
 
 
 # ==================================================================== #
-# ==================================================================== #
+### Rotina principal -> Main ========================================= #
 
 
-# main program
 if __name__ == "__main__":
 	
 	if (len(sys.argv) > 1):
