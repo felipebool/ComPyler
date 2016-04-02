@@ -1,17 +1,15 @@
 #!/usr/bin/python
 
 # FAZER ESSAS COISAS AQUI CAPSLOCK
-delimiters = [' ', '\t', '\n', '(', ')', '{', '}', ';']
+DELIMITER  = [' ', '\t', '\n', '(', ')', '{', '}', ';']
 
-data_type  = ['int', 'char', 'float', 'const', 'string']
-spec_chars = ['{', '}', '[', ']', '(', ')', ';']
-op_arit    = ['+', '++', '-', '--', '*', '/', '#']
-op_logic   = ['>', '<', '>=', '<=', '==', '!', '!=']
-reserved   = ['for', 'while', 'do', 'if', 'else', 'main']
-separators = [';', ',']
-ign_list   = [' ', '\t', '\n']
+DATA_TYPE  = ['int', 'char', 'float', 'const', 'string']
+SPEC_CHAR  = ['{', '}', '[', ']', '(', ')', ';']
+ARIT_OP    = ['+', '++', '-', '--', '*', '/', '#']
+LOGIC_OP   = ['>', '<', '>=', '<=', '==', '!', '!=']
+RESERVED   = ['for', 'while', 'do', 'if', 'else', 'main']
 
-forbidden  = ['@', '$', '`']
+FORBIDDEN  = ['@', '$', '`', ',']
 
 # Few useful constants (this is more like language, but...)
 NEWLINE    = '\n'
@@ -27,3 +25,6 @@ OPENCOMMENT  = '/*'
 CLOSECOMMENT = '*/'
 
 CHAR = 1
+
+ERROR = 'error'
+EOF   = 'eof'

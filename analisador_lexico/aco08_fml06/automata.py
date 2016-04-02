@@ -3,35 +3,18 @@
 import grammar as grammar
 import error_messages as error
 
-lines = 0
-
-# TODO
-#  - line counting
-#     - count_lines is not changing lines...
-#     - count_lines is counting 4 lines more than what there is in the source
-
-def count_lines(ch):
-   global lines
-
-   if ch == grammar.NEWLINE:
-      lines += lines
-# ------------------------------------------------------------------------------
-
-
 def skip_blank(fp):
-   """Skip blank spaces till next non blank character"""
    symbol = fp.read(grammar.CHAR)
 
    while True:
       if not symbol.isspace():
          fp.seek(fp.tell() - 1)
          break
-      count_lines(symbol)
       symbol = fp.read(grammar.CHAR)
 # ------------------------------------------------------------------------------
 
+
 def skip_comment(fp):
-   """Skip comment and put put fp in the next character after end comment"""
    window = fp.read(grammar.CHAR)
 
    while True:
@@ -55,33 +38,28 @@ def skip_comment(fp):
 
 
 def is_alpha(fp, ch):
-   """
-      Return an alpha token. Alpha tokens can be identifiers,
-      reserved words and language types (int, float, string
-      and char), is_alpha returns the file pointer (fp) in
-      the next not blank character.
-   """
+   """Return an alpha token (identifiers, reserved words and language types)"""
    symbol = ch
    lexeme = ''
 
    while True:
-      if symbol in grammar.forbidden:
+      if symbol in grammar.FORBIDDEN:
          return {'error': error.FORBIDDEN_SYMBOL % (symbol)}
 
-      if symbol in grammar.delimiters:
+      if symbol in grammar.DELIMITER:
          fp_pos = fp.tell()
          break
 
-      if symbol in grammar.op_arit or symbol == '=':
+      if symbol in grammar.ARIT_OP or symbol == '=':
          fp_pos = fp.tell()
          break
 
       lexeme += symbol
       symbol = fp.read(grammar.CHAR)
 
-   if lexeme in grammar.data_type:
+   if lexeme in grammar.DATA_TYPE:
       token = {'token': "<type;%s>" % (lexeme)}
-   elif lexeme in grammar.reserved: 
+   elif lexeme in grammar.RESERVED: 
       token = {'token': "<reserved;%s>" % (lexeme)}
    else:
       token = {'token': "<id;%s>" % (lexeme)}
@@ -92,21 +70,17 @@ def is_alpha(fp, ch):
 
 
 def is_digit(fp, ch):
-   """
-      Return a number token. Number tokens are numbers, float or integer.
-      The only characters allowed here are numbers (digits) and points (only
-      one inside a lexeme
-   """
+   """Return a number token"""
    has_point = False
    symbol = ch
    lexeme = ""
    token = {}
 
    while True:
-      if symbol in grammar.forbidden:
+      if symbol in grammar.FORBIDDEN:
          return {'error': error.FORBIDDEN_SYMBOL % (symbol)}
 
-      if symbol in grammar.delimiters:
+      if symbol in grammar.DELIMITER:
          fp_pos = fp.tell()
          fp.seek(fp_pos - 1)
          break
@@ -131,7 +105,7 @@ def is_digit(fp, ch):
          else:
             fp.seek(fp_pos)
 
-      if symbol in grammar.delimiters:
+      if symbol in grammar.DELIMITER:
          break
 
       symbol = fp.read(grammar.CHAR)
@@ -158,11 +132,11 @@ def is_arithmetic_op(fp, ch):
       if lexeme == grammar.OPENCOMMENT:
          token = skip_comment(fp)
 
-      if lexeme in grammar.op_arit:
+      if lexeme in grammar.ARIT_OP:
          token = {'token': "<op_arit;%s>" % (lexeme)}
 
       
-      if not lexeme[1] in grammar.op_arit:
+      if not lexeme[1] in grammar.ARIT_OP:
          token = {'token': "<op_arit;%s>" % (symbol)}
          fp.seek(fp_pos)
 
@@ -174,7 +148,7 @@ def is_logical_op_or_attr(fp, ch):
    lexeme = symbol
    token = {}
 
-   if lexeme in grammar.op_logic:
+   if lexeme in grammar.LOGIC_OP:
       token = {'token': "<op_log;%s>" % (lexeme)}
 
    if lexeme == '=':
@@ -183,10 +157,10 @@ def is_logical_op_or_attr(fp, ch):
    fp_pos = fp.tell()
    lexeme += fp.read(grammar.CHAR)
 
-   if symbol in grammar.forbidden:
+   if symbol in grammar.FORBIDDEN:
       return {'error': error.FORBIDDEN_SYMBOL % (symbol)}
 
-   if lexeme in grammar.op_logic:
+   if lexeme in grammar.LOGIC_OP:
       token = {'token': "<op_log;%s>" % (lexeme)}
    else:
       fp.seek(fp_pos)
@@ -240,7 +214,7 @@ def get_token(fp):
       token = is_string_char_value(fp, symbol)
 
    # not part 
-   if symbol in grammar.forbidden:
+   if symbol in grammar.FORBIDDEN:
       token = {'error': error.FORBIDDEN_SYMBOL % (symbol)}
 
    if symbol.isalpha():      
@@ -249,13 +223,13 @@ def get_token(fp):
    elif symbol.isdigit():
       token = is_digit(fp, symbol)
 
-   elif symbol in grammar.op_arit:
+   elif symbol in grammar.ARIT_OP:
       token = is_arithmetic_op(fp, symbol)
 
-   elif symbol in grammar.op_logic or symbol == '=':
+   elif symbol in grammar.LOGIC_OP or symbol == '=':
       token = is_logical_op_or_attr(fp, symbol)
 
-   elif symbol in grammar.spec_chars:
+   elif symbol in grammar.SPEC_CHAR:
       token = is_special_char(fp,symbol)
 
    elif symbol == grammar.NEWLINE:
