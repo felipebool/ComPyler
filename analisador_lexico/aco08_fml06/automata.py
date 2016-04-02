@@ -3,7 +3,7 @@
 import grammar as grammar
 import error_messages as error
 
-line = 1
+line = 0
 
 def skip_blank(fp):
    symbol = fp.read(grammar.CHAR)
@@ -13,6 +13,7 @@ def skip_blank(fp):
       if not symbol.isspace():
          fp.seek(fp.tell() - 1)
          break
+
       elif symbol == grammar.NEWLINE:
          line += 1
          
@@ -31,12 +32,12 @@ def skip_comment(fp):
          line += 1
 
       if len(symbol) == 0:
-         return {grammar.ERROR: error.MISSING_END_COMMENT % (line)} 
+         return {grammar.ERROR: error.MISSING_END_COMMENT % (line + 1)} 
 
       window += symbol
 
       if window == grammar.OPENCOMMENT:
-                 return {grammar.ERROR: error.MISSING_END_COMMENT % (line)}
+                 return {grammar.ERROR: error.MISSING_END_COMMENT % (line + 1)}
 
       if window != grammar.CLOSECOMMENT:
          window = window[1]
@@ -55,9 +56,11 @@ def is_alpha(fp, ch):
 
    while True:
       if symbol in grammar.FORBIDDEN:
-         return {grammar.ERROR: error.FORBIDDEN_SYMBOL % (line, symbol)}
+         return {grammar.ERROR: error.FORBIDDEN_SYMBOL % (line + 1, symbol)}
 
-      if symbol in grammar.DELIMITER:
+      if symbol in grammar.DELIMITER or \
+         symbol in grammar.LOGIC_OP or \
+         symbol in grammar.ARIT_OP:
          fp_pos = fp.tell()
          break
 
@@ -91,7 +94,7 @@ def is_digit(fp, ch):
 
    while True:
       if symbol in grammar.FORBIDDEN:
-         return {grammar.ERROR: error.FORBIDDEN_SYMBOL % (line, symbol)}
+         return {grammar.ERROR: error.FORBIDDEN_SYMBOL % (line + 1, symbol)}
 
       if symbol in grammar.DELIMITER:
          fp_pos = fp.tell()
@@ -101,11 +104,11 @@ def is_digit(fp, ch):
       lexeme += symbol
 
       if symbol.isalpha():
-         return {grammar.ERROR: error.ID_OR_NUMBER % (line)}
+         return {grammar.ERROR: error.ID_OR_NUMBER % (line + 1)}
 
       if symbol == '.':
          if has_point:
-            return {grammar.ERROR: error.EXTRA_DOTS_NUMBER % (line)}
+            return {grammar.ERROR: error.EXTRA_DOTS_NUMBER % (line + 1)}
          else:
             has_point = True
 
@@ -113,7 +116,7 @@ def is_digit(fp, ch):
          symbol = fp.read(grammar.CHAR)
 
          if not symbol.isdigit():
-            return {grammar.ERROR: error.DOT_WITHOUT_NUMBER % (line)}
+            return {grammar.ERROR: error.DOT_WITHOUT_NUMBER % (line + 1)}
          else:
             fp.seek(fp_pos)
 
@@ -171,7 +174,7 @@ def is_logical_op_or_attr(fp, ch):
    lexeme += fp.read(grammar.CHAR)
 
    if symbol in grammar.FORBIDDEN:
-      return {grammar.ERROR: error.FORBIDDEN_SYMBOL % (line, symbol)}
+      return {grammar.ERROR: error.FORBIDDEN_SYMBOL % (line + 1, symbol)}
 
    if lexeme in grammar.LOGIC_OP:
       token = {grammar.TOKEN: "<op_log;%s>" % (lexeme)}
@@ -198,7 +201,7 @@ def is_string_char_value(fp, ch):
 
       symbol = fp.read(grammar.CHAR)
       if not symbol == grammar.SINGLEQUOTE:
-         return {grammar.ERROR: error.BIG_CHAR % (line)}
+         return {grammar.ERROR: error.BIG_CHAR % (line + 1)}
       else:
          lexeme += symbol
 
@@ -207,7 +210,7 @@ def is_string_char_value(fp, ch):
    else:
       symbol = fp.read(grammar.CHAR)
       if symbol == grammar.DOUBLEQUOTE:
-         return {grammar.ERROR: error.EMPTY_STRING % (line)}
+         return {grammar.ERROR: error.EMPTY_STRING % (line + 1)}
 
       while True:
          symbol = fp.read(grammar.CHAR)
@@ -229,7 +232,7 @@ def get_token(fp):
       token = is_string_char_value(fp, symbol)
 
    elif symbol in grammar.FORBIDDEN:
-      token = {grammar.ERROR: error.FORBIDDEN_SYMBOL % (line, symbol)}
+      token = {grammar.ERROR: error.FORBIDDEN_SYMBOL % (line + 1, symbol)}
 
    elif symbol.isalpha():      
       token = is_alpha(fp, symbol)
@@ -250,7 +253,7 @@ def get_token(fp):
       token = {grammar.EOF: line}
 
    else:
-      token = {grammar.ERROR, error.UNKNOWN % (line)}
+      token = {grammar.ERROR, error.UNKNOWN % (line + 1)}
 
    skip_blank(fp)
    return token
