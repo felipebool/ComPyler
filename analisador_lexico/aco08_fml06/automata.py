@@ -3,37 +3,49 @@
 import grammar as grammar
 import error_messages as error
 
-# TODO: remove this 
-import sys
+lines = 0
 
 # TODO
-# - line counting
-# - should I remove the eof checking? Oo
+#  - line counting
+#     - count_lines is not changing lines...
+#     - count_lines is counting 4 lines more than what there is in the source
+
+def count_lines(ch):
+   global lines
+
+   if ch == grammar.NEWLINE:
+      lines += lines
+# ------------------------------------------------------------------------------
+
 
 def skip_blank(fp):
    """Skip blank spaces till next non blank character"""
-   symbol = fp.read(1)
+   symbol = fp.read(grammar.CHAR)
 
    while True:
       if not symbol.isspace():
          fp.seek(fp.tell() - 1)
          break
-      symbol = fp.read(1)
+      count_lines(symbol)
+      symbol = fp.read(grammar.CHAR)
 # ------------------------------------------------------------------------------
 
 def skip_comment(fp):
    """Skip comment and put put fp in the next character after end comment"""
-   window = fp.read(1)
+   window = fp.read(grammar.CHAR)
 
    while True:
-      symbol = fp.read(1)
+      symbol = fp.read(grammar.CHAR)
 
       if len(symbol) == 0:
          return {'error': error.MISSING_END_COMMENT} 
 
       window += symbol
 
-      if window != '*/':
+      if window == grammar.OPENCOMMENT:
+         return {'error': error.MISSING_END_COMMENT}
+
+      if window != grammar.CLOSECOMMENT:
          window = window[1]
       else:
          break
@@ -53,9 +65,6 @@ def is_alpha(fp, ch):
    lexeme = ''
 
    while True:
-      if len(symbol) == 0:
-         return {'error': error.IDENTIFIER_EOF}
-
       if symbol in grammar.forbidden:
          return {'error': error.FORBIDDEN_SYMBOL % (symbol)}
 
@@ -68,7 +77,7 @@ def is_alpha(fp, ch):
          break
 
       lexeme += symbol
-      symbol = fp.read(1)
+      symbol = fp.read(grammar.CHAR)
 
    if lexeme in grammar.data_type:
       token = {'token': "<type;%s>" % (lexeme)}
@@ -94,9 +103,6 @@ def is_digit(fp, ch):
    token = {}
 
    while True:
-      if len(symbol) == 0:
-         return {'error': error.IDENTIFIER_EOF}
-
       if symbol in grammar.forbidden:
          return {'error': error.FORBIDDEN_SYMBOL % (symbol)}
 
@@ -128,7 +134,7 @@ def is_digit(fp, ch):
       if symbol in grammar.delimiters:
          break
 
-      symbol = fp.read(1)
+      symbol = fp.read(grammar.CHAR)
    
    token = {'token': "<num;%s>" % (lexeme)}
    return token
@@ -147,9 +153,9 @@ def is_arithmetic_op(fp, ch):
 
    if symbol in ['/', '+', '-']:
       fp_pos = fp.tell()
-      lexeme += fp.read(1)
+      lexeme += fp.read(grammar.CHAR)
 
-      if lexeme == '/*':
+      if lexeme == grammar.OPENCOMMENT:
          token = skip_comment(fp)
 
       if lexeme in grammar.op_arit:
@@ -160,11 +166,10 @@ def is_arithmetic_op(fp, ch):
          token = {'token': "<op_arit;%s>" % (symbol)}
          fp.seek(fp_pos)
 
-
    return token
 # ------------------------------------------------------------------------------
 
-def is_logical_op_or_attribution(fp, ch):
+def is_logical_op_or_attr(fp, ch):
    symbol = ch
    lexeme = symbol
    token = {}
@@ -176,7 +181,7 @@ def is_logical_op_or_attribution(fp, ch):
       token = {'token': "<attr;%s>" % (lexeme)}
 
    fp_pos = fp.tell()
-   lexeme += fp.read(1)
+   lexeme += fp.read(grammar.CHAR)
 
    if symbol in grammar.forbidden:
       return {'error': error.FORBIDDEN_SYMBOL % (symbol)}
@@ -199,29 +204,27 @@ def is_string_char_value(fp, ch):
    symbol = ch
    lexeme = symbol
 
-   # char
-   if symbol == '\'':
-      symbol = fp.read(1)
+   if symbol == grammar.SINGLEQUOTE:
+      symbol = fp.read(grammar.CHAR)
       lexeme += symbol
 
-      symbol = fp.read(1)
-      if not symbol == '\'':
+      symbol = fp.read(grammar.CHAR)
+      if not symbol == grammar.SINGLEQUOTE:
          return {'error': error.BIG_CHAR}
       else:
          lexeme += symbol
 
       token = {'token': "<%s;char_value>" % (lexeme)}
 
-   # string
    else:
-      symbol = fp.read(1)
-      if symbol == "\"":
+      symbol = fp.read(grammar.CHAR)
+      if symbol == grammar.DOUBLEQUOTE:
          return {'error': error.EMPTY_STRING}
 
       while True:
-         symbol = fp.read(1)
+         symbol = fp.read(grammar.CHAR)
          lexeme += symbol
-         if symbol == "\"":
+         if symbol == grammar.DOUBLEQUOTE:
             token = {'token': "<%s;str_value>" % (lexeme)}
             break
 
@@ -230,10 +233,10 @@ def is_string_char_value(fp, ch):
 
 def get_token(fp):
    skip_blank(fp)
-   symbol = fp.read(1)
+   symbol = fp.read(grammar.CHAR)
    token = {}
 
-   if symbol in ['"', '\'']:
+   if symbol in grammar.QUOTES:
       token = is_string_char_value(fp, symbol)
 
    # not part 
@@ -250,12 +253,12 @@ def get_token(fp):
       token = is_arithmetic_op(fp, symbol)
 
    elif symbol in grammar.op_logic or symbol == '=':
-      token = is_logical_op_or_attribution(fp, symbol)
+      token = is_logical_op_or_attr(fp, symbol)
 
    elif symbol in grammar.spec_chars:
       token = is_special_char(fp,symbol)
 
-   elif symbol == '\n':
+   elif symbol == grammar.NEWLINE:
       token = {'eof': 'eof'}
 
    skip_blank(fp)
