@@ -1,4 +1,3 @@
-     int var1;
    int var2;
 int var3;
 
@@ -16,7 +15,7 @@ int     function1()   {
 int    function2() {
    float vara;
    float varb;
-   /* do stuff here */
+   /* do stuff  here */
 }
 
 int function3() {/* do stuff here */}

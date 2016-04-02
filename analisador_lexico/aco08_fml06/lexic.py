@@ -19,4 +19,5 @@ if __name__ == "__main__":
                print token.get('token')
 
             if token.has_key('eof'):
+               print "\n%d lines were scanned, everything is fine!\n" % (token.get('eof'))
                sys.exit()

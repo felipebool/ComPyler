@@ -24,7 +24,10 @@ QUOTES      = [SINGLEQUOTE, DOUBLEQUOTE]
 OPENCOMMENT  = '/*'
 CLOSECOMMENT = '*/'
 
-CHAR = 1
+# token keys
+COMMENT = 'comment'
+TOKEN   = 'token'
+ERROR   = 'error'
+EOF     = 'eof'
 
-ERROR = 'error'
-EOF   = 'eof'
+CHAR = 1
