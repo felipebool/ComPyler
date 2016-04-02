@@ -212,6 +212,7 @@ def is_string_char_value(fp, ch):
       if symbol == grammar.DOUBLEQUOTE:
          return {grammar.ERROR: error.EMPTY_STRING % (line + 1)}
 
+      # FIXME: test if eof was string was closed
       while True:
          symbol = fp.read(grammar.CHAR)
          lexeme += symbol
