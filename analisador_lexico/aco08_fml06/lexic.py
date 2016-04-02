@@ -18,3 +18,7 @@ if __name__ == "__main__":
             if token.has_key('token'):
                print token.get('token')
 
+            if token.has_key('eof'):
+               sys.exit()
+         else:
+            print token.get('comment')

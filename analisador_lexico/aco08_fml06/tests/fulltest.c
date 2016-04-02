@@ -6,6 +6,8 @@ const const1 = 3.666;
 const  const2 = 2;
 const   const3 = 1;
 
+
+
 int     function1()   {
    float var1;
    /* do stuff here */
@@ -70,4 +72,5 @@ asdfasdf
 
     string bola = "asdfasdf";
     char lala = 'a';
+
 }
