@@ -21,16 +21,16 @@ da string de entrada.
    * SPEC_CHAR: is_special_char
    * FORBIDDEN: FORBIDDEN_SYMBOL
 
-- is_digit
+###is_digit
 Este estado reconhece lexemas que representam números. 
 
--- Transições
+####Transições
    * 0-9\.DELIMITERS:                  DOT_WITHOUT_NUMBER
    * (O-9 + ((0-9)\*\.(0-9)\*):        EXTRA_DOTS
    * (0-9)(0-9)\*(a-z + A-Z)\*(0-9)\*: ID_OR_NUMBER
    * FORBIDDEN:                        FORBIDDEN_SYMBOL
 
-- is_alpha
+###is_alpha
 
 Contagem de linhas
 
