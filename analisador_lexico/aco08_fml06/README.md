@@ -16,6 +16,7 @@ a linha onde ocorreu o erro.
 O estado inicial é o get_token, este estado funciona como um roteador, ele lê o
 primeiro caractere do lexema e escolhe o estado apropriado para direcionar o
 processamento da string de entrada.
+
 Quando recebe o token retornado por algum dos outros estados, get_token ignora
 os espaços em branco antes do próximo token usando skip_blank.
 
@@ -75,13 +76,19 @@ Estado que reconhece *símbolos especiais da linguagem*, por exemplo, '{' e ';'
 Este estado não gera transições
 
 
+##Contagem de linhas
+A contagem de linhas é feita pelas duas únicas funções que lidam "caracteres
+desnecessários", skip_blank() e skip_comment(). A primeira é chamada sempre
+antes de enviar o retorno de get_token e a segunda sempre que '/\*' for encontrado.
 
+A quantidade de linhas lida fica armazenada na variável global *lines*. Optamos
+por utilizar uma variável global pois a contagem da linha é feita somente
+por skip_blank e skip_comment em momentos distintos e, além disso, todo estado
+que gera erro retorna no token o número da linha onde o erro foi encontrado.
 
-Contagem de linhas
+##Decisões de projeto
 
-Decisões de projeto
-
-- Identificado começando com número ou número com símbolo letra
+###Identificado começando com número ou número com símbolo letra em alguma posição
 Quando um símbolo número é lido em get_token, o automato transita para o estado
 is_digit, onde o processamento do número acontece. Caso, em algum momento, seja
 lido um símbolo letra, é gerado um erro léxico. O erro sinaliza duas
