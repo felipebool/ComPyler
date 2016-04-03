@@ -4,6 +4,11 @@ O analisador léxico foi implementado utilizando um autômato relativamente simp
 São 14 estados, 6 deles estados de aceitação, 1 estado inicial, e o restante estados
 de erro.
 
+Quando um erro é detectado em algum dos estados de aceitação, o automato "transita"
+para algum dos estados de erro. Na prática, a mensagem de erro é gerada no estado
+de aceitação e o token é retornado para o estado inicial com a mensagem de erro e
+a linha onde ocorreu o erro.
+
 
 ##Estados
 
@@ -21,8 +26,9 @@ da string de entrada.
    * SPEC_CHAR: is_special_char
    * FORBIDDEN: FORBIDDEN_SYMBOL
 
+
 ###is_digit
-Este estado reconhece lexemas que representam números. 
+Estado que reconhece *números*. 
 
 ####Transições
    * 0-9\.DELIMITERS:                  DOT_WITHOUT_NUMBER
@@ -30,7 +36,44 @@ Este estado reconhece lexemas que representam números.
    * (0-9)(0-9)\*(a-z + A-Z)\*(0-9)\*: ID_OR_NUMBER
    * FORBIDDEN:                        FORBIDDEN_SYMBOL
 
+
 ###is_alpha
+Estado que reconhece *identificadores*, *palavras reservadas*, e *tipos*.
+
+####Transições
+   * FORBIDDEN:                        FORBIDDEN_SYMBOL
+
+
+###is_string_char_value
+Estado que reconhece valores atribuídos para *strings* e *chars*.
+
+####Transições
+   * '(a-z + A-Z)(a-z + A-Z)\*': BIG_CHAR
+   * "":                         EMPTY_STRING
+
+
+###is_logical_op_or_attr
+Estado que reconhece *operadores lógicos* e *atribuição*.
+
+####Transições
+   * FORBIDDEN:                        FORBIDDEN_SYMBOL
+
+
+###is_arithmetic
+Estado que reconhece *operadores aritméticos*.
+
+####Transições
+Este estado não gera transições
+
+
+###is_special_char
+Estado que reconhece *símbolos especiais da linguagem*, por exemplo, '{' e ';'
+
+####Transições
+Este estado não gera transições
+
+
+
 
 Contagem de linhas
 
