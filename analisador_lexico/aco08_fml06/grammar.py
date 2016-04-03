@@ -4,7 +4,7 @@ DELIMITER  = [' ', '\t', '\n', '(', ')', '{', '}', ';']
 
 SPEC_CHAR  = ['{', '}', '[', ']', '(', ')', ';']
 DATA_TYPE  = ['int', 'char', 'float', 'const', 'string']
-RESERVED   = ['for', 'while', 'do', 'if', 'else', 'main', 'return']
+RESERVED   = ['for', 'while', 'if', 'else', 'main', 'return']
 
 ARIT_OP    = ['+', '++', '-', '--', '*', '/', '#', '%']
 REL_OP     = ['>', '<', '>=', '<=', '==', '!=']

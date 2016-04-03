@@ -1,14 +1,13 @@
 #Analisador Léxico
 
 O analisador léxico foi implementado utilizando um autômato relativamente simples.
-São 14 estados, 6 deles estados de aceitação, 1 estado inicial, e o restante estados
-de erro.
+São 8 estados, o estado inicial é responsável por rotear a string de entrada para
+a função adequada e retornar erro caso leia um symbolo que não pertence a
+linguagem.
 
-Quando um erro é detectado em algum dos estados de aceitação, o automato "transita"
-para algum dos estados de erro. Na prática, a mensagem de erro é gerada no estado
-de aceitação e o token é retornado para o estado inicial com a mensagem de erro e
-a linha onde ocorreu o erro.
-
+Quando um erro é detectado em algum dos estados, o processamento é interrompido
+e é retornado um *token de erro* contendo uma mensagem de erro indicando o tipo
+do erro e a linha onde ocorreu.
 
 ##Estados
 
@@ -24,8 +23,9 @@ os espaços em branco antes do próximo token usando skip_blank.
    * 0-9:       is_digit
    * a-z, A-Z:  is_alpha
    * ", ':      is_string_char_value
-   * LOGI_OP:   is_logical_op_or_attr
-   * ARIT_OP:   is_arithmetic
+   * LOGI_OP:   is_logic_op
+   * REL_OP:    is_rel_op_or_attr
+   * ARIT_OP:   is_arithmetic_op
    * SPEC_CHAR: is_special_char
    * FORBIDDEN: FORBIDDEN_SYMBOL
 
@@ -42,6 +42,10 @@ Estado que reconhece *números*.
 
 ###is_alpha
 Estado que reconhece *identificadores*, *palavras reservadas*, e *tipos*.
+Identificadores são quaisquer palavras compostas somente por símbolos
+alpha. *Palavras reservadas* podem ser **for**, **while**, **if**, **else**,
+**main** e **return** e os tipos suportados são **int**, **char**, **float**,
+**const** e **string**.
 
 ####Transições
    * FORBIDDEN:                        FORBIDDEN_SYMBOL
@@ -55,8 +59,8 @@ Estado que reconhece valores atribuídos para *strings* e *chars*.
    * "":                         EMPTY_STRING
 
 
-###is_logical_op_or_attr
-Estado que reconhece *operadores lógicos* e *atribuição*.
+###is_logic_op
+Estado que reconhece *operadores lógicos*.
 
 ####Transições
    * FORBIDDEN:                        FORBIDDEN_SYMBOL
