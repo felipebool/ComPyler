@@ -77,8 +77,8 @@ Este estado não gera transições
 
 
 ##Contagem de linhas
-A contagem de linhas é feita pelas duas únicas funções que lidam "caracteres
-desnecessários", skip_blank() e skip_comment(). A primeira é chamada sempre
+A contagem de linhas é feita pelas duas únicas funções que lidam com "caracteres
+desnecessários", *skip_blank()* e *skip_comment()*. A primeira é chamada sempre
 antes de enviar o retorno de get_token e a segunda sempre que '/\*' for encontrado.
 
 A quantidade de linhas lida fica armazenada na variável global *lines*. Optamos
@@ -88,7 +88,7 @@ que gera erro retorna no token o número da linha onde o erro foi encontrado.
 
 ##Decisões de projeto
 
-###Identificado começando com número ou número com símbolo letra em alguma posição
+###Identificador começando com número ou número com símbolo letra em alguma posição
 Quando um símbolo número é lido em get_token, o automato transita para o estado
 is_digit, onde o processamento do número acontece. Caso, em algum momento, seja
 lido um símbolo letra, é gerado um erro léxico. O erro sinaliza duas
