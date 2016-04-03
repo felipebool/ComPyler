@@ -13,9 +13,11 @@ a linha onde ocorreu o erro.
 ##Estados
 
 ###get_token (estado inicial)
-O estado inicial é o get_token, esta função funciona como um roteador, ela lê o
-primeiro caractere do lexema e escolhe o estado apropriado para direcionar o processamento
-da string de entrada.
+O estado inicial é o get_token, este estado funciona como um roteador, ele lê o
+primeiro caractere do lexema e escolhe o estado apropriado para direcionar o
+processamento da string de entrada.
+Quando recebe o token retornado por algum dos outros estados, get_token ignora
+os espaços em branco antes do próximo token usando skip_blank.
 
 ####Transições:
    * 0-9:       is_digit
@@ -60,7 +62,7 @@ Estado que reconhece *operadores lógicos* e *atribuição*.
 
 
 ###is_arithmetic
-Estado que reconhece *operadores aritméticos*.
+Estado que reconhece *operadores aritméticos* e *ignora comentários*
 
 ####Transições
 Este estado não gera transições
