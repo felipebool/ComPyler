@@ -8,10 +8,10 @@ MISSING_END_COMMENT = \
 "\nLexical error @ line %d: \n\
 Have you closed your comment, lad?\n"
 
-IDENTIFIER_EOF = \
+STRING_EOF = \
 "\nLexical error @ line %d: \n\
-EOF reached when reading an identifier, check \
-this, buddy!\n"
+EOF reached when reading a string, please, check \
+this, friend!\n"
 
 FORBIDDEN_SYMBOL = \
 "\nLexical error @ line %d: \n\
@@ -36,11 +36,11 @@ BIG_CHAR = \
 "\nLexical error @ line %d:\n\
 I think your char is a little big, chap!\n"
 
-EMPTY_STRING = \
+EMPTY_CHAR = \
 "\nLexical error @ line %d:\n\
-It is sad but you must have something inside double \
+It is sad but you must have something inside single \
 quotes, sir!\n"
 
 UNKNOWN = \
 "\nLexical error @ line %d:\n\
-You got me, friend! I don't know what happened...\n"
+You got me here, friend! I don't know what happened...\n"

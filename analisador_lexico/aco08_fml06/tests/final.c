@@ -10,7 +10,7 @@ int do_int_stuff() {
 }
 
 float do_float_stuff() {
-   return 5.0 * floatv + 2.3;
+   return 5.0 * floatv + 0;
 }
 
 char do_char_stuff() {
@@ -26,6 +26,9 @@ main {
    float floatlocal   = do_float_stuff();
    char charlocal     = do_char_stuff();
    string stringlocal = do_string_stuff();
+
+   char problematico;
+
 
    if (intlocal >= floatlocal)
       intlocal = intv;

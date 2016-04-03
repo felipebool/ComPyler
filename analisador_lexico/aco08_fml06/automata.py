@@ -25,6 +25,8 @@ def skip_comment(fp):
    window = fp.read(grammar.CHAR)
    global line
 
+   open_comment_line = line
+
    while True:
       symbol = fp.read(grammar.CHAR)
 
@@ -32,12 +34,12 @@ def skip_comment(fp):
          line += 1
 
       if len(symbol) == 0:
-         return {grammar.ERROR: error.MISSING_END_COMMENT % (line + 1)} 
+         return {grammar.ERROR: error.MISSING_END_COMMENT % (open_comment_line + 1)} 
 
       window += symbol
 
       if window == grammar.OPENCOMMENT:
-                 return {grammar.ERROR: error.MISSING_END_COMMENT % (line + 1)}
+         return {grammar.ERROR: error.MISSING_END_COMMENT % (open_comment_line + 1)}
 
       if window != grammar.CLOSECOMMENT:
          window = window[1]
@@ -204,12 +206,13 @@ def is_rel_op_or_attr(fp, ch):
    return token
 # ------------------------------------------------------------------------------
 
+
 def is_special_char(fp, ch):
    token = {grammar.TOKEN: "<;%s>" % (ch)}
    return token
 # ------------------------------------------------------------------------------
 
-# TODO: deal with string/char without closing "|'
+
 def is_string_char_value(fp, ch):
    symbol = ch
    lexeme = symbol
@@ -219,7 +222,11 @@ def is_string_char_value(fp, ch):
       symbol = fp.read(grammar.CHAR)
       lexeme += symbol
 
+      if symbol == grammar.SINGLEQUOTE:
+         return {grammar.ERROR: error.EMPTY_CHAR % (line + 1)}
+
       symbol = fp.read(grammar.CHAR)
+
       if not symbol == grammar.SINGLEQUOTE:
          return {grammar.ERROR: error.BIG_CHAR % (line + 1)}
       else:
@@ -228,20 +235,21 @@ def is_string_char_value(fp, ch):
       token = {grammar.TOKEN: "<%s;char_value>" % (lexeme)}
 
    else:
-      symbol = fp.read(grammar.CHAR)
-      if symbol == grammar.DOUBLEQUOTE:
-         return {grammar.ERROR: error.EMPTY_STRING % (line + 1)}
-
-      # FIXME: test if eof was string was closed
-      while True:
+      while True:         
          symbol = fp.read(grammar.CHAR)
+
+         if len(symbol) == 0:
+            return {grammar.ERROR: error.STRING_EOF % (line + 1)}
+
          lexeme += symbol
+
          if symbol == grammar.DOUBLEQUOTE:
             token = {grammar.TOKEN: "<%s;str_value>" % (lexeme)}
             break
 
    return token
 # ------------------------------------------------------------------------------
+
 
 def get_token(fp):
    skip_blank(fp)
@@ -277,7 +285,7 @@ def get_token(fp):
       token = {grammar.EOF: line}
 
    else:
-      token = {grammar.ERROR, error.UNKNOWN % (line + 1)}
+      token = {grammar.ERROR: error.UNKNOWN % (line + 1)}
 
    skip_blank(fp)
    return token
