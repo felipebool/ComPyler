@@ -1,18 +1,18 @@
-= Analisador Léxico
+=Analisador Léxico
 
 O analisador léxico foi implementado utilizando um autômato relativamente simples.
 São 14 estados, 6 deles estados de aceitação, 1 estado inicial, e o restante estados
 de erro.
 
 
-== Estados
+==Estados
 
-=== get_token (estado inicial)
+===get_token (estado inicial)
 O estado inicial é o get_token, esta função funciona como um roteador, ela lê o
 primeiro caractere do lexema e escolhe o estado apropriado para direcionar o processamento
 da string de entrada.
 
-==== Transições:
+====Transições:
    * 0-9:       is_digit
    * a-z, A-Z:  is_alpha
    * ", ':      is_string_char_value
