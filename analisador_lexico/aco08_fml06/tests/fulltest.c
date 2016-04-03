@@ -60,7 +60,7 @@ asdfasdf
       b = c;
    }
 
-   while (a < 32) {a++;}
+   while (a <<< 32) {a++;}
 
    for (i = 0;
    i < 357;
