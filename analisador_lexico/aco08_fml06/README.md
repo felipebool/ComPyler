@@ -2,7 +2,7 @@
 
 O analisador léxico foi implementado utilizando um autômato relativamente simples.
 São 8 estados, o estado inicial é responsável por rotear a string de entrada para
-a função adequada e retornar erro caso leia um symbolo que não pertence a
+o estado adequado e retornar erro caso leia um symbolo que não pertence a
 linguagem.
 
 Quando um erro é detectado em algum dos estados, o processamento é interrompido

@@ -142,9 +142,13 @@ def is_arithmetic_op(fp, ch):
    if symbol in ['*', '#']:
       token = {grammar.TOKEN: "<op_arit;%s>" % lexeme}
 
+
    if symbol in ['/', '+', '-']:
       fp_pos = fp.tell()
       lexeme += fp.read(grammar.CHAR)
+
+      if lexeme[1] in grammar.FORBIDDEN:
+         return {grammar.ERROR: error.FORBIDDEN_SYMBOL % (line + 1, symbol)}
 
       if lexeme == grammar.OPENCOMMENT:
          token = skip_comment(fp)
@@ -156,6 +160,7 @@ def is_arithmetic_op(fp, ch):
       if not lexeme[1] in grammar.ARIT_OP:
          token = {grammar.TOKEN: "<op_arit;%s>" % (symbol)}
          fp.seek(fp_pos)
+
 
    return token
 # ------------------------------------------------------------------------------
@@ -272,7 +277,7 @@ def get_token(fp):
    elif symbol in grammar.ARIT_OP:
       token = is_arithmetic_op(fp, symbol)
 
-   elif symbol in grammar.REL_OP or symbol == '=':
+   elif symbol in grammar.REL_OP or symbol == '=' or symbol == '!':
       token = is_rel_op_or_attr(fp, symbol)
 
    elif symbol in grammar.SPEC_CHAR:
