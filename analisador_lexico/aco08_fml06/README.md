@@ -86,6 +86,7 @@ por utilizar uma variável global pois a contagem da linha é feita somente
 por skip_blank e skip_comment em momentos distintos e, além disso, todo estado
 que gera erro retorna no token o número da linha onde o erro foi encontrado.
 
+
 ##Decisões de projeto
 
 ###Identificador começando com número ou número com símbolo letra em alguma posição
@@ -95,4 +96,9 @@ lido um símbolo letra, é gerado um erro léxico. O erro sinaliza duas
 possibilidades: ou existe uma letra no meio do número ou o identificador começa
 com um número.
 
+###Bugs conhecidos
 
+####Total de linhas
+Nem sempre o total de linhas mostrado corresponde ao total do arquivo, resultado
+varia em 1, para mais, o que não representa problema para mostrar o linha onde
+ocorreu erro léxico, esta linha a mais é lida na última posição do arquivo.

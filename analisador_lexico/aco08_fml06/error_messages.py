@@ -1,5 +1,9 @@
 #!/bin/bash
 
+UNKNOWN_LOGIC_OPERATOR = \
+"\nLexical error @ line %d: \n\
+I don't think \'%s\' is part of the language, mate...\n"
+
 MISSING_END_COMMENT = \
 "\nLexical error @ line %d: \n\
 Have you closed your comment, lad?\n"

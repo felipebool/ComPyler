@@ -1,13 +1,14 @@
 #!/usr/bin/python
 
-# FAZER ESSAS COISAS AQUI CAPSLOCK
 DELIMITER  = [' ', '\t', '\n', '(', ')', '{', '}', ';']
 
-DATA_TYPE  = ['int', 'char', 'float', 'const', 'string']
 SPEC_CHAR  = ['{', '}', '[', ']', '(', ')', ';']
-ARIT_OP    = ['+', '++', '-', '--', '*', '/', '#']
-LOGIC_OP   = ['>', '<', '>=', '<=', '==', '!', '!=']
-RESERVED   = ['for', 'while', 'do', 'if', 'else', 'main']
+DATA_TYPE  = ['int', 'char', 'float', 'const', 'string']
+RESERVED   = ['for', 'while', 'do', 'if', 'else', 'main', 'return']
+
+ARIT_OP    = ['+', '++', '-', '--', '*', '/', '#', '%']
+REL_OP     = ['>', '<', '>=', '<=', '==', '!=']
+LOGIC_OP   = ['||', '&&']
 
 FORBIDDEN  = ['@', '$', '`', ',']
 

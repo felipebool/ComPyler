@@ -158,14 +158,34 @@ def is_arithmetic_op(fp, ch):
    return token
 # ------------------------------------------------------------------------------
 
-def is_logical_op_or_attr(fp, ch):
+def is_logic_op(fp, ch):
+   global line
+   token = {}
+
+   symbol = ch
+   lexeme = symbol + fp.read(1)
+
+   if lexeme[0] in grammar.FORBIDDEN or lexeme[1] in grammar.FORBIDDEN:
+      return {grammar.ERROR: error.FORBIDDEN_SYMBOL % (line + 1, symbol)}
+
+   if lexeme in grammar.LOGIC_OP:
+      token = {grammar.TOKEN: "<op_logic;%s>" % (lexeme)}
+   else:
+      token = {grammar.ERROR: error.UNKNOWN_LOGIC_OPERATOR % (line + 1, lexeme)}   
+
+   return token
+# ------------------------------------------------------------------------------
+   
+
+def is_rel_op_or_attr(fp, ch):
+   global line
+
    symbol = ch
    lexeme = symbol
    token = {}
-   global line
 
    if lexeme in grammar.LOGIC_OP:
-      token = {grammar.TOKEN: "<op_log;%s>" % (lexeme)}
+      token = {grammar.TOKEN: "<op_rel;%s>" % (lexeme)}
 
    if lexeme == '=':
       token = {grammar.TOKEN: "<attr;%s>" % (lexeme)}
@@ -176,8 +196,8 @@ def is_logical_op_or_attr(fp, ch):
    if symbol in grammar.FORBIDDEN:
       return {grammar.ERROR: error.FORBIDDEN_SYMBOL % (line + 1, symbol)}
 
-   if lexeme in grammar.LOGIC_OP:
-      token = {grammar.TOKEN: "<op_log;%s>" % (lexeme)}
+   if lexeme in grammar.REL_OP:
+      token = {grammar.TOKEN: "<op_rel;%s>" % (lexeme)}
    else:
       fp.seek(fp_pos)
    
@@ -244,11 +264,14 @@ def get_token(fp):
    elif symbol in grammar.ARIT_OP:
       token = is_arithmetic_op(fp, symbol)
 
-   elif symbol in grammar.LOGIC_OP or symbol == '=':
-      token = is_logical_op_or_attr(fp, symbol)
+   elif symbol in grammar.REL_OP or symbol == '=':
+      token = is_rel_op_or_attr(fp, symbol)
 
    elif symbol in grammar.SPEC_CHAR:
-      token = is_special_char(fp,symbol)
+      token = is_special_char(fp, symbol)
+
+   elif symbol in ['|', '&']:
+      token = is_logic_op(fp, symbol)
 
    elif symbol == grammar.NEWLINE:
       token = {grammar.EOF: line}
