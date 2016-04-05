@@ -34,12 +34,6 @@ os espaços em branco antes do próximo token usando skip_blank.
 ###is_digit
 Estado que reconhece *números*. 
 
-####Transições
-   * 0-9\.DELIMITERS:                  DOT_WITHOUT_NUMBER
-   * (O-9 + ((0-9)\*\.(0-9)\*):        EXTRA_DOTS
-   * (0-9)(0-9)\*(a-z + A-Z)\*(0-9)\*: ID_OR_NUMBER
-   * FORBIDDEN:                        FORBIDDEN_SYMBOL
-
 
 ###is_alpha
 Estado que reconhece *identificadores*, *palavras reservadas*, e *tipos*.
@@ -48,37 +42,21 @@ alpha. *Palavras reservadas* podem ser **for**, **while**, **if**, **else**,
 **main** e **return** e os tipos suportados são **int**, **char**, **float**,
 **const** e **string**.
 
-####Transições
-   * FORBIDDEN:                        FORBIDDEN_SYMBOL
-
 
 ###is_string_char_value
 Estado que reconhece valores atribuídos para *strings* e *chars*.
-
-####Transições
-   * '(a-z + A-Z)(a-z + A-Z)\*': BIG_CHAR
-   * "":                         EMPTY_STRING
 
 
 ###is_logic_op
 Estado que reconhece *operadores lógicos*.
 
-####Transições
-   * FORBIDDEN:                        FORBIDDEN_SYMBOL
-
 
 ###is_arithmetic
 Estado que reconhece *operadores aritméticos* e *ignora comentários*
 
-####Transições
-Este estado não gera transições
-
 
 ###is_special_char
 Estado que reconhece *símbolos especiais da linguagem*, por exemplo, '{' e ';'
-
-####Transições
-Este estado não gera transições
 
 
 ##Contagem de linhas
