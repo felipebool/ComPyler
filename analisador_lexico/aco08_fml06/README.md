@@ -20,16 +20,6 @@ processamento da string de entrada.
 Quando recebe o token retornado por algum dos outros estados, get_token ignora
 os espaços em branco antes do próximo token usando skip_blank.
 
-####Transições:
-   * 0-9:       is_digit
-   * a-z, A-Z:  is_alpha
-   * ", ':      is_string_char_value
-   * LOGI_OP:   is_logic_op
-   * REL_OP:    is_rel_op_or_attr
-   * ARIT_OP:   is_arithmetic_op
-   * SPEC_CHAR: is_special_char
-   * FORBIDDEN: FORBIDDEN_SYMBOL
-
 
 ###is_digit
 Estado que reconhece *números*. 
