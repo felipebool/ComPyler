@@ -1,5 +1,5 @@
    int var2;
-int var3;
+int var_3;
 
 const const1 = 3.666;
 const  const2 = 2;
@@ -18,7 +18,7 @@ int    function2() {
    /* do stuff  here */
 }
 
-int function3() {/* do stuff here */}
+int function3() { do stuff here */}
 
 int
 function4()/*weird placed comment*/{/* do stuff here */
