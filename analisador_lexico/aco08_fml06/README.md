@@ -36,12 +36,15 @@ alpha. *Palavras reservadas* podem ser **for**, **while**, **if**, **else**,
 ###is_string_char_value
 Estado que reconhece valores atribuídos para *strings* e *chars*.
 
+###is_rel_op_or_attr
+Estado que reconhece operadores relacionais e atribuição
+
 
 ###is_logic_op
 Estado que reconhece *operadores lógicos*.
 
 
-###is_arithmetic
+###is_arithmetic_op
 Estado que reconhece *operadores aritméticos* e *ignora comentários*
 
 
