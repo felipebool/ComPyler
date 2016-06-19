@@ -9,7 +9,6 @@ if __name__ == "__main__":
 
    symbol_table = list()
     
-    
    with open(source) as fp:
       while True:
          token = automata.get_token(fp)
