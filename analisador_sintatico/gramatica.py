@@ -3,6 +3,7 @@
 
 import copy
 import pdb
+import sys
 
 EPSILON = 'EPSILON'
 INICIO = 'S'
@@ -37,17 +38,17 @@ class Producao(object):
 
 class Gramatica(object):
     def __init__(self, regras, inicial):
-        self.__regras__      = (Producao(INICIO, (inicial, FIM) ),) + tuple( Producao(regra[0], tuple(regra[1])) for regra in regras )
+        self.__regras__      = (Producao(INICIO, (inicial, FIM)),) + tuple(Producao(regra[0], tuple(regra[1])) for regra in regras )
         self.__regras_dict__ = dict()
 
         for regra in self.__regras__:
             self.__regras_dict__.setdefault(regra.simbolo(), set()).add(regra.produz())
 
-        self.__nterminais__ = set( regra.simbolo() for regra in self.__regras__ )
-        self.__simbolos__   = set( simbolo for regra in self.__regras__ for simbolo in regra.produz() ) | self.__nterminais__
+        self.__nterminais__ = set(regra.simbolo() for regra in self.__regras__)
+        self.__simbolos__   = set(simbolo for regra in self.__regras__ for simbolo in regra.produz() ) | self.__nterminais__
         self.__terminais__  = self.__simbolos__ - self.__nterminais__
-        self.__first__      = dict( (simbolo, set()) for simbolo in self.__nterminais__)
-        self.__follow__     = dict( (simbolo, set()) for simbolo in self.__simbolos__)
+        self.__first__      = dict((simbolo, set()) for simbolo in self.__nterminais__)
+        self.__follow__     = dict((simbolo, set()) for simbolo in self.__simbolos__)
 
         def fi(simbolos):
             if len(simbolos) == 0:
@@ -66,6 +67,7 @@ class Gramatica(object):
                 resp.add(EPSILON)
             return resp
 
+        # calcula conjunto FIRST para todo mundo
         change = True
         while change:
             change = False
@@ -75,6 +77,8 @@ class Gramatica(object):
                     change = True
                     self.__first__[regra.simbolo()] |= f
 
+
+        # calcula conjunto FOLLOW para todo mundo
         change = True
         while change:
             change = False

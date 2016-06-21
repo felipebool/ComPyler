@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import sys, os, getopt
 
@@ -31,31 +32,32 @@ def import_gram(gfile):
 
 
 def main(argv):
-    # importa gramatica from 
+    # importa gramatica
     producoes = import_gram('minic.gram')
 
+    # arquivo fonte de entrada
     source = sys.argv[1]
+
+    # arquivo de saída dos tokens gerados
     dest = open('output.tokens', 'w')
 
+    # tabela de simbolos
     symbol_table = list()
-    
+    tokens = list()
+
+    print "Lexical analysis ----------------------------------------"
     with open(source) as fp: 
         while True:
             token = automata.get_token(fp)
+            
             if not token.has_key('comment'):
-                # AQUI -------------------------------------------------------------------
-                # ------------------------------------------------------------------------
-
-
-
-
                 if token.has_key('error'):
                     print token.get('error')
                     sys.exit()
 
                 if token.has_key('token'):
                     dest.write(token.get('token') + '\n')
-
+                    tokens.append(token.get('token').split(';', 1)[1][:-1])
 
                     if (token.get('token').split(';')[0])[1:] == "id":
                         identifier = (token.get('token').split(';')[1])[:-1]
@@ -64,16 +66,14 @@ def main(argv):
 
                 if token.has_key('eof'):
                     print "\n%d lines were scanned, everything is fine!\n" % (token.get('eof'))
+                    print "---------------------------------------------------------\n\n"
+                    break
 
-#                    print "SYMBOL TABLE"
-#                    for entry in symbol_table:
-#                        print "identifier\t%s" % (entry.get('identifier')) 
-
-                    sys.exit()
-
-    
-
-
+    print "Sintatical analysis -------------------------------------"
+    grammar = Gramatica(producoes, producoes[0][0])
+    slr = Slr(grammar)
+    slr.parse(tokens)
+    print "---------------------------------------------------------"
 
 if __name__ == '__main__':
     main(sys.argv)

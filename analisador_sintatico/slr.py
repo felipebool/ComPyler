@@ -54,11 +54,10 @@ class Estado(object):
         for item in novos:
             simbolo = item.proximoSimbolo()
             if simbolo in gram.nterminais():
-                fecho = set( Item(simbolo, produz) for produz in gram.producoes(simbolo) )
+                fecho = set(Item(simbolo, produz) for produz in gram.producoes(simbolo))
                 fecho -= self.__itens__
                 self.__itens__ |= fecho
                 novos.extend(fecho)
-
 		
     def filhos(self, gramatica):
         d = dict()
@@ -94,22 +93,21 @@ class Slr(object):
     def __init__(self, gramatica):
         self.__gramatica__ = gramatica
         self.__geraEstados__()
-	
+
+    # gera os estados que serão irão compôr a tabela	
     def __geraEstados__(self):
         self.__estados__ = []
 
-        estado0 = Estado( Item(gramatica.INICIO, produz) for produz in self.__gramatica__.producoes(gramatica.INICIO))
+        # partindo do estado0
+        estado0 = Estado(Item(gramatica.INICIO, produz) for produz in self.__gramatica__.producoes(gramatica.INICIO))
         estado0.fecha(self.__gramatica__)
 
         feitos = set((estado0,))
-
-        fila = list((estado0,))
-
+        fila   = list((estado0,))
         tabela = list()
 
         for numero, estado in enumerate(fila):
             tabela.append(dict())
-            print '%d:\n' % numero, estado
             for item in estado.itens():
                 if item.fim():
                     for simbolo in self.__gramatica__.sequencia(item.simbolo()):
@@ -117,34 +115,29 @@ class Slr(object):
                             raise Exception('reduz-reduz detectado!')
                         if tabela[numero][simbolo][0] == NADA:
                             tabela[numero][simbolo] = (REDUZ, item.producao())
+
             for simbolo, filho in estado.filhos(self.__gramatica__):
                 if tabela[numero].setdefault(simbolo, (NADA, 0))[0] == REDUZ:
-                    print 'Aviso! Conflito empilha-reduz no simbolo "%s"' % (simbolo)
+                    print 'Conflito empilha-reduz no simbolo "%s"' % (simbolo)
+
                 if simbolo == gramatica.FIM:
                     tabela[numero][simbolo] = (ACEITA, 0)
+
                 elif not filho in feitos:
                     tabela[numero][simbolo] = (EMPILHA, len(fila))
                     feitos.add(filho)
                     fila.append(filho)
+
                 else:
                     tabela[numero][simbolo] = (EMPILHA, fila.index(filho))
-        print 'tabela:'
-        for estado, linha in enumerate(tabela):
-            print estado, ': ' , linha
+
         self.__tabela__ = tabela
 
 	
     def parse(self, simbolos):
         simbolos = list(simbolos)
-
-        aux_list = list()
-        for i in simbolos:
-            aux_list.append(i.split(';', 1)[1][:-1])
-        simbolos = aux_list
-
-        print '-----------------------------------------'
-
         simbolos.append(gramatica.FIM)
+
         aceita = False
         pilha = []
         pilha2 = []
@@ -154,18 +147,22 @@ class Slr(object):
         simbolo = iter_simbolos.next()
         while not aceita:
             if not self.__tabela__[estado].has_key(simbolo):
-                print '-------------'
-                print simbolo
-                print '-------------'
-                raise('simbolo "%s" nao existe no estado %s' % (str(simbolo), str(estado)))
+                print '---------------------------'
+                print 'Sintatical error: "%s"' % (str(simbolo))
+                print '---------------------------'
+                sys.exit()
+
             acao = self.__tabela__[estado][simbolo]
+
             if acao[0] == ACEITA:
                 aceita = True
+
             elif acao[0] == EMPILHA:
                 pilha.append(estado)
                 pilha2.append(simbolo)
                 estado = acao[1]
                 simbolo = iter_simbolos.next()
+
             elif acao[0] == REDUZ:
                 for i in xrange(len(acao[1].produz())):
                     estado = pilha.pop()
@@ -174,6 +171,7 @@ class Slr(object):
                 pilha2.append(acao[1].simbolo())
                 estado = self.__tabela__[estado][acao[1].simbolo()][1]
                 print acao[1]
+
             print ' '.join(pilha2)
         return True
 

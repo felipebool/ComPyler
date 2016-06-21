@@ -3,43 +3,54 @@ float floatv;
 char chv;
 string stringv;
 
-const constc;
+const constc = 3;
 
 int do_int_stuff() {
-   return 5 * intv + 3;
+   int a;
+    a = 0;
+   return a;
 }
 
 float do_float_stuff() {
-   return 5.0 * floatv + 0;
+    float b;
+    b = 1.0;
+   return b;
 }
 
 char do_char_stuff() {
-   return chv;
+    char c;
+    c = 'q';
+   return c;
 }
 
 string do_string_stuff() {
-   return stringv;
+   string x; 
+    x = "lala";
+   return x;
 }
 
 main {
-   int intlocal       = do_int_stuff();
-   float floatlocal   = do_float_stuff();
-   char charlocal     = do_char_stuff();
-   string stringlocal = do_string_stuff();
+   int intlocal;
+   float floatlocal;
+   char charlocal;
+   string stringlocal;
 
    char problematico;
 
 
-   if (intlocal >= floatlocal)
+   if (intlocal >= floatlocal) {
       intlocal = intv;
+    }
 
-   while (floatlocal <= intlocal && floatlocal )
+   while (floatlocal <= intlocal && floatlocal > bola) {
       intlocal++;
+    }
 
    if (intlocal == floatlocal || intlocal <= floatlocal) {
-      charlocal = 'i'
+      charlocal = 'i';
    }
 
-   for (intlocal = 0; intlocal < floatlocal; inlocal++)
+   for (intlocal = 0; intlocal < floatlocal; inlocal++) {
       floatlocal++;
+    }
 }
