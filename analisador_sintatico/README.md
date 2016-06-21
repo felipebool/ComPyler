@@ -13,8 +13,11 @@ Fazer o analisador sintático SLR(1) para a linguagem definida em sala.
 ###Mudanças na gramática
 Na gramática definida em classe existiam algumas regras que tratavam dos tokens de números,
 são elas:
+
 NUM -> NUM_INT | NUM_FLOAT
+
 NUM_INT -> DIGITO NUM_INT | DIGITO
+
 NUM_FLOAT -> NUM_INT.NUM_INT
 
 Estas regras saíram da gramática do nosso trabalho pois a análise léxica já resolve o problema
