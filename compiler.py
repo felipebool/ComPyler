@@ -3,10 +3,10 @@
 
 import sys, os, getopt
 
-sys.path.insert(0, '../analisador_lexico/aco08_fml06/')
+sys.path.insert(0, 'analisador_lexico/aco08_fml06/')
 import automata
 
-sys.path.insert(0, '../analisador_sintatico/')
+sys.path.insert(0, 'analisador_sintatico/')
 from gramatica import Gramatica
 from slr import Slr
 
