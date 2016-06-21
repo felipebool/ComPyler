@@ -118,7 +118,8 @@ class Slr(object):
 
             for simbolo, filho in estado.filhos(self.__gramatica__):
                 if tabela[numero].setdefault(simbolo, (NADA, 0))[0] == REDUZ:
-                    print 'Conflito empilha-reduz no simbolo "%s"' % (simbolo)
+                    aux2 = 3
+#                    print 'Conflito empilha-reduz no simbolo "%s"' % (simbolo)
 
                 if simbolo == gramatica.FIM:
                     tabela[numero][simbolo] = (ACEITA, 0)
