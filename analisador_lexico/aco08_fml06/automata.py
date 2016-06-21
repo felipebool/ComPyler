@@ -78,7 +78,7 @@ def is_alpha(fp, ch):
    elif lexeme in grammar.RESERVED: 
       token = {grammar.TOKEN: "<reserved;%s>" % (lexeme)}
    else:
-      token = {grammar.TOKEN: "<id;%s>" % (lexeme)}
+      token = {grammar.TOKEN: "<%s;id>" % (lexeme)}
 
    fp.seek(fp_pos - 1)
    return token
@@ -127,7 +127,7 @@ def is_digit(fp, ch):
 
       symbol = fp.read(grammar.CHAR)
    
-   token = {grammar.TOKEN: "<num;%s>" % (lexeme)}
+   token = {grammar.TOKEN: "<%s;num>" % (lexeme)}
    return token
 # ------------------------------------------------------------------------------
 
@@ -192,10 +192,13 @@ def is_rel_op_or_attr(fp, ch):
    token = {}
 
    if lexeme in grammar.LOGIC_OP:
-      token = {grammar.TOKEN: "<op_rel;%s>" % (lexeme)}
+      token = {grammar.TOKEN: "<op_log;%s>" % (lexeme)}
 
    if lexeme == '=':
       token = {grammar.TOKEN: "<attr;%s>" % (lexeme)}
+
+   if lexeme in grammar.REL_OP:
+      token = {grammar.TOKEN: "<op_rel;%s>" % (lexeme)}
 
    fp_pos = fp.tell()
    lexeme += fp.read(grammar.CHAR)
@@ -237,7 +240,7 @@ def is_string_char_value(fp, ch):
       else:
          lexeme += symbol
 
-      token = {grammar.TOKEN: "<%s;char_value>" % (lexeme)}
+      token = {grammar.TOKEN: "<%s;ch>" % (lexeme)}
 
    else:
       while True:         
@@ -249,7 +252,7 @@ def is_string_char_value(fp, ch):
          lexeme += symbol
 
          if symbol == grammar.DOUBLEQUOTE:
-            token = {grammar.TOKEN: "<%s;str_value>" % (lexeme)}
+            token = {grammar.TOKEN: "<%s;string>" % (lexeme)}
             break
 
    return token
