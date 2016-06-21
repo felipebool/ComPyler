@@ -65,7 +65,7 @@ def main(argv):
                         symbol_table.append(table_entry)
 
                 if token.has_key('eof'):
-                    print "\n%d lines were scanned, everything is fine!\n" % (token.get('eof'))
+                    print "\n%d lines were scanned, everything is fine!" % (token.get('eof'))
                     print "---------------------------------------------------------\n\n"
                     break
 

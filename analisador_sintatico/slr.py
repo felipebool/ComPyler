@@ -148,9 +148,10 @@ class Slr(object):
         simbolo = iter_simbolos.next()
         while not aceita:
             if not self.__tabela__[estado].has_key(simbolo):
-                print '---------------------------'
-                print 'Sintatical error: "%s"' % (str(simbolo))
-                print '---------------------------'
+                print '\nSintatical error near token "%s"' % (str(simbolo))
+                print 'This is the stack at the moment: '
+                print ' '.join(pilha2)
+                print "---------------------------------------------------------"
                 sys.exit()
 
             acao = self.__tabela__[estado][simbolo]
@@ -171,8 +172,6 @@ class Slr(object):
                 pilha.append(estado)
                 pilha2.append(acao[1].simbolo())
                 estado = self.__tabela__[estado][acao[1].simbolo()][1]
-                print acao[1]
 
-            print ' '.join(pilha2)
         return True
 
