@@ -3,7 +3,7 @@
 
 import sys, os, getopt
 
-sys.path.insert(0, 'analisador_lexico/aco08_fml06/')
+sys.path.insert(0, 'analisador_lexico/')
 import automata
 
 sys.path.insert(0, 'analisador_sintatico/')

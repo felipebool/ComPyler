@@ -10,7 +10,7 @@ e é retornado um *token de erro* contendo uma mensagem de erro indicando o tipo
 do erro e a linha onde ocorreu.
 
 ##O Autômato
-![alt tag](https://github.com/felipebool/trabalhos_compiladores/blob/master/analisador_lexico/aco08_fml06/automata.png)
+![alt tag](https://github.com/felipebool/trabalhos_compiladores/blob/master/analisador_lexico/automata.png)
 
 ###get_token (estado inicial)
 O estado inicial é o get_token, este estado funciona como um roteador, ele lê o
