@@ -50,6 +50,7 @@ class Gramatica(object):
         self.__first__      = dict((simbolo, set()) for simbolo in self.__nterminais__)
         self.__follow__     = dict((simbolo, set()) for simbolo in self.__simbolos__)
 
+        # calcula conjunto first individualmente
         def fi(simbolos):
             if len(simbolos) == 0:
                 return set([EPSILON])
