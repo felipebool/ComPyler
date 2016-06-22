@@ -1,4 +1,3 @@
-
 0:   PROG -> . DECL_VAR CONST FUNCOES MAIN 
      DECL_VAR -> .
      TIPO -> . int 
