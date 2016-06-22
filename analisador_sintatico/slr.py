@@ -119,7 +119,6 @@ class Slr(object):
             for simbolo, filho in estado.filhos(self.__gramatica__):
                 if tabela[numero].setdefault(simbolo, (NADA, 0))[0] == REDUZ:
                     aux2 = 3
-#                    print 'Conflito empilha-reduz no simbolo "%s"' % (simbolo)
 
                 if simbolo == gramatica.FIM:
                     tabela[numero][simbolo] = (ACEITA, 0)
@@ -133,11 +132,11 @@ class Slr(object):
                     tabela[numero][simbolo] = (EMPILHA, fila.index(filho))
 
         self.__tabela__ = tabela
-
 	
     def parse(self, simbolos):
         simbolos = list(simbolos)
         simbolos.append(gramatica.FIM)
+        line_token = 0
 
         aceita = False
         pilha = []
@@ -148,11 +147,7 @@ class Slr(object):
         simbolo = iter_simbolos.next()
         while not aceita:
             if not self.__tabela__[estado].has_key(simbolo):
-                print '\nSintatical error near token "%s"' % (str(simbolo))
-                print 'This is the stack at the moment: '
-                print ' '.join(pilha2)
-                print "---------------------------------------------------------"
-                sys.exit()
+                return {'result': False, 'line': line_token, 'token': simbolo}
 
             acao = self.__tabela__[estado][simbolo]
 
@@ -164,6 +159,7 @@ class Slr(object):
                 pilha2.append(simbolo)
                 estado = acao[1]
                 simbolo = iter_simbolos.next()
+                line_token += 1
 
             elif acao[0] == REDUZ:
                 for i in xrange(len(acao[1].produz())):
@@ -173,5 +169,4 @@ class Slr(object):
                 pilha2.append(acao[1].simbolo())
                 estado = self.__tabela__[estado][acao[1].simbolo()][1]
 
-        return True
-
+        return {'result': True}

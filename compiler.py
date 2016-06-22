@@ -44,11 +44,14 @@ def main(argv):
     # tabela de simbolos
     symbol_table = list()
     tokens = list()
+    lines = list()
 
     print "Lexical analysis ----------------------------------------"
     with open(source) as fp: 
         while True:
-            token = automata.get_token(fp)
+            token_line = automata.get_token(fp)
+            token = token_line[0]
+            line  = token_line[1]
             
             if not token.has_key('comment'):
                 if token.has_key('error'):
@@ -58,6 +61,7 @@ def main(argv):
                 if token.has_key('token'):
                     dest.write(token.get('token') + '\n')
                     tokens.append(token.get('token').split(';', 1)[1][:-1])
+                    lines.append(line)
 
                     if (token.get('token').split(';')[0])[1:] == "id":
                         identifier = (token.get('token').split(';')[1])[:-1]
@@ -71,8 +75,13 @@ def main(argv):
 
     print "Sintatical analysis -------------------------------------"
     grammar = Gramatica(producoes, producoes[0][0])
-    slr = Slr(grammar)
-    slr.parse(tokens)
+    slr     = Slr(grammar)
+    result  = slr.parse(tokens)
+
+    if result.get('result'):
+        print 'Everything went fine. No syntactical errors found.'
+    else:
+        print 'Syntactical error near "%s" at line %s' % (result.get('token'), lines[int(result.get('line'))])
     print "---------------------------------------------------------"
 
 if __name__ == '__main__':

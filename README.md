@@ -13,7 +13,7 @@ gramática até aquele ponto, na perspectiva léxica.
 
 ## Analisador Sintático
 O diretório [analisador_sintatico](analisador_sintatico/) contém o analisador sintático
-slr desenvolvido e a documentação apresentando as decisões de projeto e os bugs conhecidos.
+slr desenvolvido e a documentação apresentando as decisões de projeto.
 
 ## Execução
 Os dois módulos (analisador_lexico e analisador_sintatico) podem ser utilizados

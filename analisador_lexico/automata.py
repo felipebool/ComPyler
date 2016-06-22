@@ -296,5 +296,6 @@ def get_token(fp):
       token = {grammar.ERROR: error.UNKNOWN % (line + 1)}
 
 #   skip_blank(fp)
-   return token
+
+   return token, line
 
