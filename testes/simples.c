@@ -13,11 +13,9 @@ int functionc() {
 
     int    intv;
     float  f;
-    float s;
+    float  s;
     char   c;
     
-    f = PI - 0.1415;
-    s = 56.0 + '9';
     c = 'a';
     d = 2;
     d = d + 3;
