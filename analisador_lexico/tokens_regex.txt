@@ -1,6 +1,4 @@
 
-	Alexandre Calerio de Oliveira
-	Felipe Lopes 
 
 	Definições Regulares dos Tokens
 

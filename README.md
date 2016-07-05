@@ -3,7 +3,6 @@
 Aqui estão os trabalhos desenvolvidos para a disciplina de compiladores (CI211)
 do curso de Ciência da Computação da Universidade Federal do Paraná.
 
-Alunos: Alexandre Calerio de Oliveira e Felipe Mariani Lopes
 
 ## Trabalho 1: Analisador Léxico
 O diretório [analisador_lexico](analisador_lexico/) centraliza todos os arquivos
