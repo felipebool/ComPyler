@@ -12,7 +12,7 @@ do erro e a linha onde ocorreu.
 ## O Autômato
 ![alt tag](https://github.com/felipebool/trabalhos_compiladores/blob/master/analisador_lexico/automata.png)
 
-###get_token (estado inicial)
+### get_token (estado inicial)
 O estado inicial é o get_token, este estado funciona como um roteador, ele lê o
 primeiro caractere do lexema e escolhe o estado apropriado para direcionar o
 processamento da string de entrada.
